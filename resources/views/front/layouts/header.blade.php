@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                     <!--Desktop Logo-->
-                    <a class="logo" href="{{ url('/') }}"><img src="{{ asset('uploads/company') . '/' . $setting->image }}"
+                    <a class="logo" href="{{ url('/') }}"><img src="{{ asset('uploads/company') . '/' . $setting->image ?? "k640p38SSV6a71a48c016b6.webp"}}"
                             alt="JMS - Auto Parts on JAMWAL MOTORS AND SPARES"
                             title="JMS - Auto Parts on JAMWAL MOTORS AND SPARES" style="border-radius:10%;object-fit:cover;" /></a>
                     <!--End Desktop Logo-->
