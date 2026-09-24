@@ -17,11 +17,11 @@ class CreateAdminsTable extends Migration
             $table->id();
             $table->string('name',50);
             $table->string('email',50)->unique();
-            $table->enum('role', ['suber_admin', 'accountant','customer_service','data_entry']);
+            $table->enum('role', ['super_admin', 'accountant','customer_service','data_entry']);
             $table->string('phone',15);
             $table->string('password',255);
-            // $table->timestamps();
-            // $table->rememberToken();
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

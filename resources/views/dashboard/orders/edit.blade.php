@@ -95,9 +95,9 @@
                                                         <tr>
                                                             <td>{{ $index + 1 }}</td>
                                                             <td>{{$product->name}}</td>
-                                                            <td>${{number_format($product->pivot->price,2)}}</td>
+                                                            <td>₹{{number_format($product->price,2)}}</td>
                                                             <td>{{$product->pivot->quantity}}</td>
-                                                            <td>${{number_format($order->total_price,2)}}</td>
+                                                            <td>₹{{number_format($order->total_price,2)}}</td>
                                                             <td class="{{$product->pivot->return_status == true ? 'text-danger' : ''}}">{{$product->pivot->return_status == true ? __('site.return') : '-'}}</td>
                                                             <td>
                                                                 @if ($product->pivot->return_status || $order->payment_status == 3)

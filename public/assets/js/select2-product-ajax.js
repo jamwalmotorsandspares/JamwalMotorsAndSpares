@@ -17,7 +17,7 @@ $(document).ready(function() {
                     results: $.map(data, function(item) {
                         console.log(item);
                         return {
-                            text: item.name_en +' | '+ item.name_ar +' '+ item.car.name_en +' ('+ item.car.start_year +'-'+ item.car.end_year +') ' +' | SKU: #'+ item.id,
+                            text: item.name_en +' | '+ item.car.name_en +' ('+ item.car.start_year +'-'+ item.car.end_year +') ' +' | SKU: #'+ item.id,
                             id: item.id,
                             value: item.id,
                             // contryflage: item.description

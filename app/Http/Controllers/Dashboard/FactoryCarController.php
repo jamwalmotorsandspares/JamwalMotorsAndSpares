@@ -27,7 +27,8 @@ class FactoryCarController extends Controller
     {
         $this->authorize('check-permissions', 'read_cars');
         $factory_cars = FactoryCar::when($request->search,function ($query) use ($request){
-            return $query->where('name_en','Like','%'.$request->search.'%')->orWhere('name_ar','Like','%'.$request->search.'%');
+            return $query->where('name_en','Like','%'.$request->search.'%');
+            // ->orWhere('name_ar','Like','%'.$request->search.'%');
         })->latest('id')->paginate(10);
         return view('dashboard.factory-cars.index', compact('factory_cars'));
     }
@@ -53,7 +54,7 @@ class FactoryCarController extends Controller
     {
         $this->authorize('check-permissions', 'create_cars');
         $request->validate([
-            'name_ar' => 'required|string|max:50|unique:factory_cars,name_ar',
+            // 'name_ar' => 'required|string|max:50|unique:factory_cars,name_ar',
             'name_en' => 'required|string|max:50|unique:factory_cars,name_en',
         ]);
         FactoryCar::create($request->all());
@@ -78,7 +79,7 @@ class FactoryCarController extends Controller
     {
         $this->authorize('check-permissions', 'update_cars');
         $request->validate([
-            'name_ar' => 'required|string|max:50|unique:factory_cars,name_ar,' . $factoryCar->id,
+            // 'name_ar' => 'required|string|max:50|unique:factory_cars,name_ar,' . $factoryCar->id,
             'name_en' => 'required|string|max:50|unique:factory_cars,name_en,' . $factoryCar->id,
         ]);
         $factoryCar->update($request->all());

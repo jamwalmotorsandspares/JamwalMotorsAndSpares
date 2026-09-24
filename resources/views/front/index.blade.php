@@ -24,7 +24,7 @@
                                 <div class="slideshow-content">
                                     <div class="wrap-caption animation style1">
                                         <h2 class="mega-title white-text text-uppercase">Easy way to find the right<br>
-                                            car Parts &amp; Service</h2>
+                                            Car Spare Parts &amp; Service</h2>
                                         <a href="{{ route('products.index') }}" class="btn rounded-pill">@lang('site.shop_now')</a>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@
                                             <div class="row">
                                                 @foreach ($category->products as $i => $product)
                                                     <div class="col-lg-2 col-md-3 col-sm-4 col-4">
-                                                        <div class="category-box">
+                                                        <div class="category-box description">
                                                             <a href="{{ route('products.show', $product->id) }}">
                                                                 <img class="blur-up lazyload rounded-3 w-100"
                                                                     data-src="{{ asset('uploads/products') . '/' . $product->images[0] }}"

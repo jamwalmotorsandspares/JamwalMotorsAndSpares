@@ -13,7 +13,7 @@ class ProductController extends Controller
 
             $products = Product::with('car')->when($request['term']['term'],function ($query) use ($request){
                return $query->where('name_en','Like','%'.$request['term']['term'].'%')
-               ->orWhere('name_ar','Like','%'.$request['term']['term'].'%')
+            //    ->orWhere('name_ar','Like','%'.$request['term']['term'].'%')
                ->orWhere('id','Like','%'.$request['term']['term'].'%');
            })->limit(10)->get();
            return response()->json($products);
@@ -22,6 +22,16 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+        // dd()
+        // $product = Product::findOrFail($product->id);
+
+        // if ($product->stock < $request->quantity) {
+        //     return redirect()->back()
+        //         ->withErrors([
+        //             'product_available' => __('site.product_available')
+        //         ])
+        //         ->withInput();
+        // }
         return json_encode($product);
     }
 }

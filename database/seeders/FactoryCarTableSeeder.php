@@ -15,11 +15,11 @@ class FactoryCarTableSeeder extends Seeder
     {
 
         $cars_en = ['Hyundai','Kia'];
-        $cars_ar = ['هيونداى','كيا'];
+        // $cars_ar = ['هيونداى','كيا'];
         foreach ($cars_en as $i => $car_en) {
             FactoryCar::create([
                 'name_en' => $cars_en[$i],
-                'name_ar' => $cars_ar[$i],
+                // 'name_ar' => $cars_ar[$i],
             ]);
         }
 

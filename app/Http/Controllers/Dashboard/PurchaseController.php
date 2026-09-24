@@ -128,10 +128,10 @@ class PurchaseController extends Controller
         $current_account = $purchase->supplier->current_account;
         $append_account = $purchase->total_price - $purchase->amount_paid;
         if($purchase->payment_type == 1){ // if purchase payment type new
-            $current_account = $current_account -= $append_account; //هنقص من حساب المورد
+            $current_account = $current_account -= $append_account; //The amount will be deducted from the supplier's account
 
         }else{  // if purchase payment type return
-            $current_account = $current_account += $append_account; //هزود من حساب المورد
+            $current_account = $current_account += $append_account; //The amount will be added to the supplier's account
         }
         $account_status = ($current_account == 0 ? 3 : ($current_account > 0 ? 2 : 1));
         $purchase->supplier()->update([

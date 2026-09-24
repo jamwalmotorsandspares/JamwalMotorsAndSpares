@@ -36,15 +36,15 @@
                                 {{ csrf_field() }}
                                 {{ method_field('put') }}
                                 <div class="form-row">
-                                    <div class="col-sm-6">
+                                    {{-- <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>@lang('site.ar.name')</label>
                                             <input type="text"
                                                 class="form-control @error('name_ar') is-invalid @enderror" name="name_ar"
                                                 value="{{ $product->name_ar }}" autofocus>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
+                                    </div> --}}
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>@lang('site.en.name')</label>
                                             <input type="text"
@@ -79,6 +79,8 @@
                                             <label>@lang('site.country')</label>
                                             <select class="single-select @error('country') is-invalid @enderror"
                                                 name="country" id="country">
+                                                <option value="{{ $product->country }}">
+                                                        {{ $product->country }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -126,7 +128,9 @@
                                                 @foreach ($factory_cars as $factory_car)
                                                     <optgroup label="{{ $factory_car->name }}">
                                                         @foreach ($factory_car->cars as $car)
-                                                            <option value="{{ $car->id }}">{{ $car->name }}
+                                                            <option value="{{ $car->id }}"
+                                                              {{ $product->car->id === $car->id ? 'selected' : '' }}>
+                                                            {{ $car->name }}
                                                             </option>
                                                         @endforeach
                                                     </optgroup>
@@ -134,13 +138,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    {{-- <div class="col-sm-12 col-md-6">
                                         <div class="form-group">
                                             <label>@lang('site.ar.description')</label>
                                             <textarea name="description_ar" id="summernote-description-ar">{{ $product->description_ar }}</textarea>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    </div> --}}
+                                    <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label>@lang('site.en.description')</label>
                                             <textarea name="description_en" id="summernote-description-en">{{ $product->description_en }}</textarea>

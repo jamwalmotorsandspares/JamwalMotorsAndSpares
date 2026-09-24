@@ -69,7 +69,7 @@
                                                         href="{{ route('products.show', $product->id) }}">{{$product->name.' '.$product->car->name.' ('.$product->car->start_year.'-'.$product->car->end_year.') '.$product->country }}</a>
                                                 </td>
                                                 <td class="product-price" data-title="Price">
-                                                    ${{ number_format($product->price, 2) }}</td>
+                                                    ₹{{ number_format($product->price, 2) }}</td>
                                                 <td class="product-quantity" data-title="Quantity">
                                                     <div class="qtyField">
                                                         <label class="screen-reader-text">@lang('site.quantity')</label>
@@ -83,7 +83,7 @@
                                                     </div>
                                                 </td>
                                                 <td class="product-subtotal" data-title="Total">
-                                                    ${{ number_format($product->price * $product->pivot->quantity, 2) }}
+                                                    ₹{{ number_format($product->price * $product->pivot->quantity, 2) }}
                                                 </td>
                                             </tr>
                                         @empty
@@ -115,22 +115,22 @@
                                 <div class="row pb-2">
                                     <span class="col-6 col-sm-6 text-uppercase"><b>@lang('site.subTotal')</b></span>
                                     <span class="col-6 col-sm-6 text-end"><span
-                                            class="money">${{ number_format($sub_total, 2) }}</span></span>
+                                            class="money">₹{{ number_format($sub_total, 2) }}</span></span>
                                 </div>
                                 <div class="row pb-2 pt-2">
                                     <span class="col-6 col-sm-6 text-uppercase"><b>Tax</b></span>
-                                    <span class="col-6 col-sm-6 text-end">${{ number_format($tax_amount, 2) }}</span>
+                                    <span class="col-6 col-sm-6 text-end">₹{{ number_format($tax_amount, 2) }}</span>
                                 </div>
                                 <div class="row border-bottom pb-2 pt-2">
                                     <span class="col-6 col-sm-6 text-uppercase"><b>@lang('site.shipping')</b></span>
                                     <span
-                                        class="col-6 col-sm-6 text-end small text-uppercase">{{ $setting->shipping > 0 ? '$' . $setting->shipping : __('site.free') . ' ' . __('site.shipping') }}</span>
+                                        class="col-6 col-sm-6 text-end small text-uppercase">{{ $setting->shipping > 0 ? '₹' . $setting->shipping : __('site.free') . ' ' . __('site.shipping') }}</span>
                                 </div>
                                 <div class="row pb-2 pt-2">
                                     <span
                                         class="col-6 col-sm-6 cart__subtotal-title text-uppercase"><strong>@lang('site.total')</strong></span>
                                     <span
-                                        class="col-6 col-sm-6 cart__subtotal-title cart__subtotal text-end"><b>${{ number_format($total_price, 2) }}</b></span>
+                                        class="col-6 col-sm-6 cart__subtotal-title cart__subtotal text-end"><b>₹{{ number_format($total_price, 2) }}</b></span>
                                 </div>
                                 <a href="{{ route('checkout.create') }}"
                                     class="btn btn-lg btn-primary rounded-pill my-4 checkout w-100">@lang('site.proceed_to_checkout')</a>
@@ -189,7 +189,7 @@
                                                 href="{{ route('products.show', $product_silder->id) }}">{{ $product_silder->name }} {{ $product_silder->car->name.' ('.$product_silder->car->start_year.'-'.$product_silder->car->end_year.')' }}</a>
                                         </div>
                                         <div class="price-box"><span
-                                                class="price">${{ number_format($product_silder->price, 2) }}</span></div>
+                                                class="price">₹{{ number_format($product_silder->price, 2) }}</span></div>
                                     </div>
                                 </div>
                                 <!--End Product Detail-->

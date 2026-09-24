@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Services\ActivityTracker;
 
 class OrderController extends Controller
 {
@@ -12,9 +13,14 @@ class OrderController extends Controller
     {
         $this->middleware('auth');
     }
+    
     public function show(Order $order)
-    {
+    {   
         $checkOrder = auth()->user()->orders()->find($order->id)->get();
+                    ActivityTracker::track(
+                                        'ORDER_VIEW',
+                                        'Customer viewed order'
+                                    );
         if($checkOrder){
             return view('front.orders.show', compact('order'));
         }

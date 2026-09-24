@@ -9,6 +9,8 @@ use App\Models\Setting;
 use App\Traits\ReportTrait;
 use App\Http\Services\PaymentServices;
 use Illuminate\Http\Request;
+use App\Services\ActivityTracker;
+
 
 class CheckoutController extends Controller
 {
@@ -22,6 +24,7 @@ class CheckoutController extends Controller
 
     public function create()
     {
+        ActivityTracker::track('Checkout_Started');
         $user = auth()->user();
         if($user->products()->count() != 0){
             $setting = Setting::first();
@@ -29,6 +32,7 @@ class CheckoutController extends Controller
             $sub_total = $user->products()->sum(\DB::raw('products.price * product_user.quantity'));
             $tax_amount = $sub_total * ($setting->tax / 100);
             $total_price = $sub_total + $tax_amount + $setting->shipping;
+
             return view('front.checkout.index',compact('products','tax_amount','sub_total','total_price'));
         }else{
             return redirect()->back();
@@ -59,18 +63,40 @@ class CheckoutController extends Controller
         $user->phone = $request->phone;
         $user->update();
         $checkStock = true;
+
         foreach ($user->products as $product) {
             $checkStock = $product->stock < $product->pivot->quantity;
         }
         if($checkStock){
             return redirect()->back()->withErrors(["missing_data" => __('site.missing_data')])->withInput();
         }
+        
+        $order=$this->createOrder($user,$request->selector,true);
 
         if($request->selector == "online" ){
-            $paymentTokenUrl = $this->paymentServices->getPayment($user);
-            return redirect()->intended('https://accept.paymob.com/api/acceptance/iframes/708449?payment_token='.$paymentTokenUrl['token']);
+              ActivityTracker::track(
+                    'ONLINE_PAYMENT',
+                    'PAYMENT STARTED',
+                    $order
+                );
+    
+            $setting = Setting::first();
+            $products = $user->products;
+            $sub_total = $user->products()->sum(\DB::raw('products.price * product_user.quantity'));
+            $tax_amount = $sub_total * ($setting->tax / 100);
+            $total_price = $sub_total + $tax_amount + $setting->shipping;
+
+            return view('front.payment.confirm', compact('order'));
+        // return view('front.checkout.index',compact('products','tax_amount','sub_total','total_price','order'));
+                // return redirect()->intended(route('razorpay.createOrder', $order->id));
+            // $paymentTokenUrl = $this->paymentServices->getPayment($user);
+            // return redirect()->intended('https://accept.paymob.com/api/acceptance/iframes/708449?payment_token='.$paymentTokenUrl['token']);
         }else{
-            $this->createOrder($user,$request->selector,true);
+            ActivityTracker::track(
+                    'OFFLINE_ORDER',
+                    'CASH ON DELIVERY',
+                    $order
+                );
             session()->flash('order_success', __('site.order_successfully'));
             return redirect()->route('users.index');
         }
@@ -132,9 +158,26 @@ class CheckoutController extends Controller
             'floor' => $user->floor,
         ]);// end update order data table
         $user->products()->detach();
+
+        ActivityTracker::track(
+            'ORDER_CREATED',
+            'Order created',
+            $order
+        );
         return $order;
     }
 
+
+    public function latestOrder()
+    {
+        $order = Order::where('user_id', auth()->id())
+            ->latest('id')
+            ->first();
+
+        return response()->json([
+            'order_id' => $order?->id
+        ]);
+    }
 
     public function callback(Request $request)
     {

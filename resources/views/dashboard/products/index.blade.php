@@ -58,7 +58,7 @@
                                             <th scope="col">{{ __('site.purchase_price') }}</th>
                                             <th scope="col">{{ __('site.sale_price') }}</th>
                                             <th scope="col">{{ __('site.stock') }}</th>
-                                            <th scope="col">{{ __('site.country') }}</th>
+                                            <th scope="col">{{ __('site.category') }}</th>
                                             <th scope="col">{{ __('site.action') }}</th>
                                             <th scope="col"><input type="checkbox" value=""
                                                     id="check-box-delete-all"></th>
@@ -72,10 +72,10 @@
                                                         href="{{ route('dashboard.products.show', $product->id) }}">{{ $product->name }}</a>
                                                 </td>
                                                 <td>#{{ $product->id }}</td>
-                                                <td>${{ number_format($product->purchase_price, 2) }}</td>
-                                                <td>${{ number_format($product->price, 2) }}</td>
+                                                <td>₹{{ number_format($product->purchase_price, 2) }}</td>
+                                                <td>₹{{ number_format($product->price, 2) }}</td>
                                                 <td>{{ $product->stock }}</td>
-                                                <td>{{ $product->country }}</td>
+                                                <td>{{ $product->category->name_en }}</td>
                                                 <td>
                                                     <span>
                                                         <a href="{{ route('dashboard.products.edit', $product->id) }}"

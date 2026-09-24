@@ -24,9 +24,9 @@ class ProductTableSeeder extends Seeder
         for ($i=0; $i < 30; $i++) {
             Product::create([
                 'name_en' => $faker->sentence(2),
-                'name_ar' => $faker->sentence(2),
+                // 'name_ar' => $faker->sentence(2),
                 'description_en' => $faker->sentence(20),
-                'description_ar' => $faker->sentence(20),
+                // 'description_ar' => $faker->sentence(20),
                 'price' => rand(50,800),
                 'purchase_price' => rand(20,500),
                 'stock' => rand(20,200),

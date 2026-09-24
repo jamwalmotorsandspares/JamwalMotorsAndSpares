@@ -28,12 +28,12 @@
                             <form method="POST" action="{{ route('dashboard.categories.store') }}">
                                 @csrf
                                 <div class="form-row">
-                                    <div class="col-6">
+                                    {{-- <div class="col-6">
                                         <div class="form-group">
                                             <label>@lang('site.ar.name')</label>
                                             <input type="text" class="form-control @error('name_ar') is-invalid @enderror" name="name_ar" value="{{ old('name_ar') }}" autofocus>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>@lang('site.en.name')</label>

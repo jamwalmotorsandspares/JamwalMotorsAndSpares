@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use App\Services\ActivityTracker;
 
 class RegisterController extends Controller
 {
@@ -71,5 +73,44 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        ActivityTracker::track('REGISTERED');
+        if (session()->has('guest_cart')) {
+
+            $guestCart = session()->pull('guest_cart');
+
+            foreach ($guestCart as $item) {
+
+                $exists = $user->products()
+                    ->where('product_id', $item['product_id'])
+                    ->exists();
+
+                if (!$exists) {
+
+                    $user->products()->attach(
+                        $item['product_id'],
+                        [
+                            'quantity' => $item['quantity']
+                        ]
+                    );
+
+                } else {
+
+                    $product = $user->products()
+                        ->where('product_id', $item['product_id'])
+                        ->first();
+
+                    $user->products()->updateExistingPivot(
+                        $item['product_id'],
+                        [
+                            'quantity' => $product->pivot->quantity + $item['quantity']
+                        ]
+                    );
+                }
+            }
+        }
     }
 }

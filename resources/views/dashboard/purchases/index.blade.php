@@ -65,13 +65,13 @@
                                         @foreach ($purchases as $index => $purchase)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>#
+                                                <td>
                                                     <a href="{{ route('dashboard.purchases.show', $purchase->id) }}">
-                                                        {{ $purchase->invoice_no }}
+                                                        #{{ $purchase->invoice_no }}
                                                     </a>
                                                 </td>
                                                 <td>{{ $purchase->supplier->name }}</td>
-                                                <td>${{ number_format($purchase->total_price, 2) }}</td>
+                                                <td>₹{{ number_format($purchase->total_price, 2) }}</td>
                                                 <td>
                                                     @if ($purchase->active == 0)
 

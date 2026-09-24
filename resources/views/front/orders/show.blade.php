@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Main Progressbar CSS -->
     <link rel="stylesheet" href="{{ asset('front/assets/css/progressbar.css') }}">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 @endpush
 @section('body')
 
@@ -80,12 +81,12 @@
                                                     href="{{ route('products.show', $product->id) }}">{{ $product->name }}</a>
                                             </td>
                                             <td class="product-price" data-title="Price">
-                                                ${{ number_format($product->pivot->price, 2) }}</td>
+                                                ₹{{ number_format($product->pivot->price, 2) }}</td>
                                             <td class="product-quantity" data-title="Quantity">
                                                 {{ $product->pivot->quantity }}
                                             </td>
                                             <td class="product-subtotal" data-title="Total">
-                                                ${{ number_format($product->pivot->price * $product->pivot->quantity, 2) }}
+                                                ₹{{ number_format($product->pivot->price * $product->pivot->quantity, 2) }}
                                             </td>
                                         </tr>
                                     @empty
@@ -98,7 +99,10 @@
                                 </tbody>
                             </table>
                             <!--End Cart Table-->
+
+
                         </div>
+
                         <div class="col-12 col-sm-12 col-md-12 col-lg-4">
                             <div class="solid-border cart-total rounded-3">
                                 <h5 class="text-uppercase">@lang('site.summary') @lang('site.invoice')</h5>
@@ -141,6 +145,8 @@
                                 @endif
                                 <div class="row pb-2">
                                     <span class="col-6 col-sm-6 text-uppercase"><b>@lang('site.status')</b></span>
+                                    {{-- <span
+                                    class="col-3 col-sm-3 text-end rounded-pill {{($order->payment_status == 1 ? 'bg-success' : ($order->payment_status == 2 ? 'bg-warning' : 'bg-danger'))}} text-white px-3 py-2">{{$order->status}}</span> --}}
                                     <span class="col-6 col-sm-6 text-end">
                                             <span class="money {{($order->payment_status == 1 ? 'text-success' : ($order->payment_status == 2 ? 'text-warning' : 'text-danger'))}} ">{{$order->status}}</span>
                                     </span>
@@ -149,32 +155,54 @@
                                 <div class="row pb-2">
                                     <span class="col-6 col-sm-6 text-uppercase"><b>@lang('site.subTotal')</b></span>
                                     <span class="col-6 col-sm-6 text-end"><span
-                                            class="money">${{ number_format($order->sub_total, 2) }}</span></span>
+                                            class="money">₹{{ number_format($order->sub_total, 2) }}</span></span>
                                 </div>
                                 <div class="row pb-2">
                                     <span class="col-6 col-sm-6 text-uppercase"><b>Tax</b></span>
                                     <span class="col-6 col-sm-6 text-end"><span
-                                            class="money">${{ number_format($order->tax, 2) }}</span></span>
+                                            class="money">₹{{ number_format($order->tax, 2) }}</span></span>
                                 </div>
                                 <div class="row border-bottom pb-2 pt-2">
                                     <span class="col-6 col-sm-6 text-uppercase"><b>@lang('site.shipping')</b></span>
                                     <span
-                                        class="col-6 col-sm-6 text-end small text-uppercase">{{ $order->shipping > 0 ? '$' . number_format($order->shipping, 2) : __('site.free') . ' ' . __('site.shipping') }}</span>
+                                        class="col-6 col-sm-6 text-end small text-uppercase">{{ $order->shipping > 0 ? '₹' . number_format($order->shipping, 2) : __('site.free') . ' ' . __('site.shipping') }}</span>
                                 </div>
                                 <div class="row pb-2 pt-2">
                                     <span
                                         class="col-6 col-sm-6 cart__subtotal-title text-uppercase"><strong>@lang('site.total')</strong></span>
                                     <span
-                                        class="col-6 col-sm-6 cart__subtotal-title cart__subtotal text-end"><b>${{ number_format($order->total_price, 2) }}</b></span>
+                                        class="col-6 col-sm-6 cart__subtotal-title cart__subtotal text-end"><b>₹{{ number_format($order->total_price, 2) }}</b></span>
                                 </div>
                             </div>
                         </div>
+                        {{-- <div class="col-12 d-flex justify-content-center"">
+                            <button type="button" id="razorpay-button" data-name="{{$order->id}}" class="btn btn-primary">@lang('site.online_payment') Pay ₹{{ number_format($order->total_price, 2) }} </button>
+                        </div> --}}
                     </div>
                 </div>
             </div>
+
             <br>
             <br>
             <!--End Cart Content-->
 
         </main>
     @endsection
+ @push('js')
+        <script src="{{ asset('front/assets/js/razorpay.js') }}"></script>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+            integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        @if (session('order_success'))
+            <script>
+                swal("{{ __('site.good_job') }}", "{{ session('order_success') }}", "success");
+            </script>
+        @endif
+        @if (session('order_wrong'))
+            <script>
+                swal("{{ __('site.oops') }}", "{{ session('order_wrong') }}", "error");
+            </script>
+        @endif
+@endpush
+

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Services\ActivityTracker;
 
 class LoginController extends Controller
 {
@@ -39,9 +42,63 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+
+    protected function authenticated(Request $request, $user)
+{
+    ActivityTracker::track('LOGIN',
+    'User logged in');
+    if (session()->has('guest_cart')) {
+
+        $guestCart = session()->pull('guest_cart');
+
+        foreach ($guestCart as $item) {
+
+            $exists = $user->products()
+                ->where('product_id', $item['product_id'])
+                ->exists();
+
+            if (!$exists) {
+
+                $user->products()->attach(
+                    $item['product_id'],
+                    [
+                        'quantity' => $item['quantity']
+                    ]
+                );
+
+            } else {
+
+                $currentQty = $user->products()
+                    ->where('product_id', $item['product_id'])
+                    ->first()
+                    ->pivot
+                    ->quantity;
+
+                $user->products()->updateExistingPivot(
+                    $item['product_id'],
+                    [
+                        'quantity' => $currentQty + $item['quantity']
+                    ]
+                );
+            }
+        }
+    }
+}
+
     public function showLoginForm()
     {
         return view('front.auth.login');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        ActivityTracker::track('LOGOUT',
+        'User logged out');
+        return redirect()->route('home'); // or redirect('/');
     }
 
 }

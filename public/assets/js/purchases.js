@@ -19,7 +19,7 @@ $(document).ready(function () {
         var price = $("#price").val();
         var url = $(this).data("url");
         if (!$("#product-ajax").val() || !$("#qyt").val()) {
-            alert("ادخل بيانات المنتج !");
+            alert("Enter Product Details!");
             return false;
         }
         url = url.replace(":productId", productId);
@@ -38,7 +38,7 @@ $(document).ready(function () {
                     productIndex = index;
                 }); //end of product price
                 if (existent) {
-                    alert("هذا المنتج تم اضافته بالفعل");
+                    alert("This product has already been added");
                 } else {
                     $("#purchaseList").append(`
                 <tr>

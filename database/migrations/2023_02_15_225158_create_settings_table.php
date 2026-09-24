@@ -15,15 +15,16 @@ class CreateSettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('name',50)->default('el hinnawi')->comment('company name');
-            $table->text('address')->default('street el hinnawi')->comment('company address');
-            $table->string('phone',15)->default('01157012640')->comment('company phone');
+            $table->string('name',100)->default('JAMWAL MOTORS AND SPARES')->comment('company name');
+            $table->text('address')->default('JAMWAL MOTORS AND SPARES,NEAR NEW BRIDGE BHAMBHARWAN,AKHNOOR,JAMMU,JAMMU AND KASHMIR,181201.')->comment('company address');
+            $table->string('phone',15)->default('+917006291696')->comment('company phone');
             $table->integer('tax')->default(14)->comment('tax order');
             $table->integer('shipping')->default(0)->comment('shipping order');
             $table->text('image')->default('default.png')->comment('company image');
             $table->text('payment_url')->default('https://accept.paymob.com/api/');
             $table->text('payment_token')->default('ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2libUZ0WlNJNkltbHVhWFJwWVd3aUxDSndjbTltYVd4bFgzQnJJam8yTkRjME56WjkuTVp6N2llOEM2S3k5RHVCQTV2NzdTQ2J3REVNcFRmdjBROFFaaDBxWUxqX21FLWFiX2hCQ0NWa1ExZ2U5Y3hwQjJxWUluVWs4b19Vd1BNVzlPY0tUWEE=');
             $table->text('payment_integration_id')->default('3160861');
+            $table->timestamps();
         });
     }
 

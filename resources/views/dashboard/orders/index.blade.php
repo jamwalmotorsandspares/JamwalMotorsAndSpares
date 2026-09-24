@@ -29,6 +29,8 @@
                         <div class="card-body">
                             <div class="card-header row">
                                 <div class="col-md-6">
+                                <a href="{{ route('dashboard.orders.create') }}"
+                                        class="btn btn-primary mb-2">{{ __('site.create') }}</a>
                                     <button type="button" class="btn btn-primary mb-2" data-toggle="modal"
                                         data-target="#filterModal">{{ __('site.filter') }}</button>
                                         <a class="btn btn-primary mb-2" href="{{ route('dashboard.export-orders') }}">
@@ -64,10 +66,12 @@
                                         @foreach ($orders as $index => $order)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>#{{ $order->invoice_no }}</td>
+                                                <td><a href="{{ route('dashboard.orders.show', $order->id) }}">
+                                                        #{{ $order->invoice_no }}
+                                                    </a></td>
                                                 <td>{{ $order->user->first_name . ' ' . $order->user->last_name }}</td>
                                                 <td>{{ $order->method }}</td>
-                                                <td>${{ number_format($order->total_price, 2) }}</td>
+                                                <td>₹{{ number_format($order->total_price, 2) }}</td>
                                                 <td>
                                                     <span
                                                     class="rounded-pill {{($order->payment_status == 1 ? 'bg-success' : ($order->payment_status == 2 ? 'bg-warning' : 'bg-danger'))}} text-white px-3 py-2">{{$order->status}}</span>

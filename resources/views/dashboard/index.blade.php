@@ -25,14 +25,16 @@
                                 <div class="card-body pb-0">
                                     <div class="row justify-content-between">
                                         <div class="col-auto">
-                                            <h4 class="text-muted mb-3">@lang('site.admins')</h4>
+                                            <h4 class="text-muted mb-3">@lang('site.suppliers')</h4>
                                         </div>
-                                        <div class="col-auto">
-                                            <h2 class="text-white">{{ $admins_count }}</h2>
+                                        <div class="float-right">
+                                            <i class="text-muted icon-user" style="font-size: 60px"></i>
                                         </div>
                                     </div>
-                                    <div class="float-right">
-                                        <i class="text-muted icon-user" style="font-size: 60px"></i>
+                                    <div class="row justify-content-between">
+                                        <div class="col-auto">
+                                            <h2 class="text-white">{{ $supplier_count }}</h2>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -46,12 +48,14 @@
                                         <div class="col-auto">
                                             <h4 class="text-muted mb-3">@lang('site.clients')</h4>
                                         </div>
+                                        <div class="float-right">
+                                            <i class="text-muted icon-user" style="font-size: 60px"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-between">
                                         <div class="col-auto">
                                             <h2 class="text-white">{{ $clients_count }}</h2>
                                         </div>
-                                    </div>
-                                    <div class="float-right">
-                                        <i class="text-muted icon-user" style="font-size: 60px"></i>
                                     </div>
                                 </div>
                             </div>
@@ -65,12 +69,14 @@
                                         <div class="col-auto">
                                             <h4 class="text-muted mb-3">@lang('site.orders')</h4>
                                         </div>
+                                        <div class="float-right">
+                                            <i class="text-muted icon-basket" style="font-size: 60px"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-between">
                                         <div class="col-auto">
                                             <h2 class="text-white">{{ $orders_count }}</h2>
                                         </div>
-                                    </div>
-                                    <div class="float-right">
-                                        <i class="text-muted icon-basket" style="font-size: 60px"></i>
                                     </div>
                                 </div>
                             </div>
@@ -84,12 +90,14 @@
                                         <div class="col-auto">
                                             <h4 class="text-muted mb-3">@lang('site.products')</h4>
                                         </div>
+                                        <div class="float-right">
+                                        <i class="text-muted icon-puzzle" style="font-size: 60px"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-between">
                                         <div class="col-auto">
                                             <h2 class="text-white">{{ $products_count }}</h2>
                                         </div>
-                                    </div>
-                                    <div class="float-right">
-                                        <i class="text-muted icon-puzzle" style="font-size: 60px"></i>
                                     </div>
                                 </div>
                             </div>
@@ -101,21 +109,23 @@
                                 <div class="card-body pb-0">
                                     <div class="row justify-content-between">
                                         <div class="col-auto">
-                                            <h4 class="text-muted mb-3">@lang('site.categories')</h4>
+                                            <h4 class="text-muted mb-3">Investment</h4>
                                         </div>
-                                        <div class="col-auto">
-                                            <h2 class="text-white">{{ $categories_count }}</h2>
+                                        <div class="float-right">
+                                            <i class="text-muted icon-organization" style="font-size: 60px"></i>
                                         </div>
                                     </div>
-                                    <div class="float-right">
-                                        <i class="text-muted icon-organization" style="font-size: 60px"></i>
+                                    <div class="row justify-content-between">
+                                        <div class="col-auto">
+                                            <h3 class="text-white">₹{{ number_format($total_product_purchases, 2) }}</h3>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end card categories -->
                         <!-- start card brands -->
-                        <div class="col-sm-6 col-md-4 col-xl-3">
+                        {{-- <div class="col-sm-6 col-md-4 col-xl-3">
                             <div class="card text-white bg-primary pb-2">
                                 <div class="card-body pb-0">
                                     <div class="row justify-content-between">
@@ -131,7 +141,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- end card brands -->
                         <!-- start card sales -->
                         <div class="col-sm-6 col-md-4 col-xl-3">
@@ -141,22 +151,63 @@
                                         <div class="col-auto">
                                             <h4 class="text-muted mb-3">@lang('site.sales')</h4>
                                         </div>
-                                        <div class="col-auto">
-                                            <h2 class="text-white">${{ number_format($total_sales, 2) }}</h2>
+                                        <div class="float-right">
+                                            <i class="text-muted fa fa-money" style="font-size: 60px"></i>
                                         </div>
                                     </div>
-                                    <div class="float-right">
-                                        <i class="text-muted fa fa-money" style="font-size: 60px"></i>
+                                    <div class="row justify-content-between">
+                                        <div class="col-auto">
+                                            <h2 class="text-white">₹{{ number_format($total_sales, 2) }}</h2>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- end card sales -->
+                        <div class="col-sm-6 col-md-4 col-xl-3">
+                            <div class="card text-white bg-primary pb-2">
+                                <div class="card-body pb-0">
+                                    <div class="row justify-content-between">
+                                        <div class="col-auto">
+                                            <h4 class="text-muted mb-3">@lang('site.current_month_sales')</h4>
+                                        </div>
+                                        <div class="float-right">
+                                            <i class="text-muted fa fa-money" style="font-size: 60px"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-between">
+                                        <div class="col-auto">
+                                            <h2 class="text-white">₹{{ number_format($total_sales_current_month, 2) }}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-xl-3">
+                            <div class="card text-white bg-primary pb-2">
+                                <div class="card-body pb-0">
+                                        <div class="row justify-content-between">
+                                            <div class="col-auto">
+                                                <h4 class="text-muted mb-3">@lang('site.today_sales')</h4>
+                                            </div>
+                                            <div class="float-right">
+                                                <i class="text-muted fa fa-money" style="font-size: 60px"></i>
+                                            </div>
+                                        </div>
+                                    <div class="row justify-content-between">
+                                        <div class="col-auto">
+                                            <h2 class="text-white">₹{{ number_format($today_sales, 2) }}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div class="row">
-                <div class="col-xl-6 col-xxl-12">
+                <div class="col-xl-6 col-xxl-6">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title mb-4">@lang('site.cost_orders_and_purchases')</h4>
@@ -164,11 +215,73 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-6 col-xxl-12">
+                <div class="col-xl-6 col-xxl-6">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title mb-4">@lang('site.count_orders_and_purchases')</h4>
                             <canvas id="countChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-header row">
+                            <h2 class="card-title mb-10">TOP SELLING CUSTOMERS</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table verticle-middle mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">CUSTOMER NAME</th>
+                                            <th scope="col">{{ __('site.orders') }}</th>
+                                            <th scope="col">{{ __('site.total') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($topCustomersOrder as $index => $order)
+                                            <tr>
+                                                <td>{{ $index + 1 }}</td>
+                                                <td>{{ $order->first_name . ' ' . $order->last_name }}</td>
+                                                <td>{{ $order->order_count }}</td>
+                                                <td>₹{{ number_format($order->total_amount, 2) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-header row">
+                            <h2 class="card-title mb-10">BEST SELLING PRODUCTS</h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table verticle-middle mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">PRODUCT NAME</th>
+                                            <th scope="col">{{ __('site.quantity') }}</th>
+                                            <th scope="col">{{ __('site.total') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($bestSellingProduct as $index => $product)
+                                            <tr>
+                                                <td>{{ $product->name_en }}</td>
+                                                <td>{{ $product->total_quantity }}</td>
+                                                <td>₹{{ number_format($product->total_amount, 2) }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

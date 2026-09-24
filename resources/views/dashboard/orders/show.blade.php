@@ -23,16 +23,68 @@
         </div>
         <!-- row -->
         <div class="container-fluid">
-            <div class="row justify-content-between mb-3">
+            <div class="row justify-content-between">
+            <div class="col-12 ">
+                    <h2 class="page-heading"><a href="{{route('dashboard.orders.index')}}"> {{ __('site.return') }}</a></h2>
+                </div>
                 <div class="col-12 ">
                     <h2 class="page-heading">{{ __('site.invoice') }} {{ __('site.order') }}</h2>
                 </div>
             </div>
+             <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <div class="bootstrap-label">
+                                    {{-- <span
+                                        class="label label-{{ $order->payment_status == 1 ? 'success' : 'light' }}">{{ $order->payment_status != 1 ? __('site.draft') : __('site.active') }}</span> --}}
+                                    @if ($order->payment_status == 1)
+                                        <span class="label label-success">PAID</span>
+                                    @elseif ($order->payment_status == 2)
+                                    <span class="label label-warning">PENDING</span>
+                                    {{-- <span
+                                        class="label label-{{ $order->payment_status == 1 ? 'success' : 'light' }}">{{ $order->payment_status != 1 ? __('site.draft') : __('site.active') }}</span> --}}
+                                    @else
+                                    <span class="label label-danger">UNPAID</span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="float-right">
+                                <div class="button-group">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-outline-primary"
+                                            onclick="printDiv()">{{ __('site.print') }}</button>
+                                         @if ($order->payment_status != 1)
+                                            <button type="submit" form="formordersActive" class="btn btn-outline-primary"
+                                                {{ $order->payment_status == 1 ? 'disabled' : '' }}>{{ __('site.approval') }}</button>
+                                        @else
+                                            <a href="{{ route('dashboard.orders.edit', $order->id) }}"
+                                                class="btn btn-outline-primary">{{ __('site.payment') }}</a>
+                                        @endif
+                                    </div>
+                                </div>
+                                <form action="{{ route('dashboard.orders.active', $order->id) }}" method="post"
+                                    style="display: none" id="formordersActive">
+                                    @csrf
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row" id="print">
                 <div class="col-12">
+
+                {{-- <div class="text-right">
+
+                            <button type="button" class="btn btn-primary mb-2 btn-print"
+                                onclick="printDiv()">@lang('site.print')</button>
+                        </div> --}}
                     <div class="p-3 bg-white rounded">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <h4 class="text-uppercase">@lang('site.invoice') @lang('site.order')</h4>
                                 <div class="billed"><span
                                         class="font-weight-bold text-uppercase">@lang('site.invoice_no'):</span><span
@@ -67,6 +119,8 @@
                                         class="font-weight-bold text-uppercase">@lang('site.address'):</span><span
                                         class="ml-1">{{ $setting->address }}</span></div>
                             </div>
+                            <div class="col-md-1">
+                            </div>
                             <div class="col-md-3">
                                 <h4 class="text-uppercase">@lang('site.to')</h4>
                                 <div class="billed"><span
@@ -83,7 +137,8 @@
                                 </div>
                             </div>
                             <div class="col-md-3 text-right mt-3">
-                                <h4 class="text-primary mb-0">{{ $setting->name }}</h4><span>sparte-parts.com</span>
+                                <h4 class="text-primary mb-0">{{ $setting->name }}</h4>
+                                {{-- <span>sparte-parts.com</span> --}}
                             </div>
                         </div>
                         <div class="mt-3">
@@ -101,13 +156,13 @@
                                     <tbody>
                                         @foreach ($order->products as $index => $product)
                                             <tr>
-                                                <td>{{ $product->id }}</td>
+                                                <td>#{{ $product->id }}</td>
                                                 <td><a
                                                         href="{{ route('dashboard.products.show', $product->id) }}">{{ $product->name }}</a>
                                                 </td>
-                                                <td>${{ number_format($product->pivot->price, 2) }}</td>
+                                                <td>₹{{ number_format($product->pivot->price, 2) }}</td>
                                                 <td>{{ $product->pivot->quantity }}</td>
-                                                <td>${{ number_format($product->pivot->price * $product->pivot->quantity, 2) }}
+                                                <td>₹{{ number_format($product->pivot->price * $product->pivot->quantity, 2) }}
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -120,11 +175,11 @@
                                     <table class="table">
                                         <tr>
                                             <th>@lang('site.subTotal')</th>
-                                            <td>${{ number_format($order->sub_total, 2) }}</td>
+                                            <td>₹{{ number_format($order->sub_total, 2) }}</td>
                                         </tr>
                                         <tr>
                                             <th>Tax</th>
-                                            <td>${{ number_format($order->tax, 2) }}</td>
+                                            <td>₹{{ number_format($order->tax, 2) }}</td>
                                         </tr>
                                         <tr>
                                             <th>@lang('site.shipping')</th>
@@ -133,19 +188,14 @@
                                         </tr>
                                         <tr>
                                             <th>@lang('site.total')</th>
-                                            <td>${{ number_format($order->total_price, 2) }}</td>
+                                            <td>₹{{ number_format($order->total_price, 2) }}</td>
                                         </tr>
                                     </table>
                                 </div>
                                 <div class="col-lg-4 col-sm-5"></div>
                             </div>
                         </div>
-                        <div class="text-right mb-3">
-                            {{-- <a class="btn btn-primary btn-sm mr-5"
-                                href="{{ route('dashboard.export-invoice-order', ['id' => $order->id]) }}">@lang('site.print')</a> --}}
-                            <button type="button" class="btn btn-primary btn-sm mr-5 btn-print"
-                                onclick="printDiv()">@lang('site.print')</button>
-                        </div>
+
                     </div>
                 </div>
             </div>

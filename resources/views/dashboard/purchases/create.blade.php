@@ -76,7 +76,7 @@
                                         <label>@lang('site.price')</label>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text">$</span>
+                                                <span class="input-group-text">₹</span>
                                                 <span class="input-group-text">0.00</span>
                                             </div>
                                             <input type="text" class="form-control" id="price">
@@ -121,7 +121,7 @@
                                 <hr>
                                 <div class="form-row">
                                     <div class="col-sm-4">
-                                        <h5>@lang('site.total'): $<span id="total-price">0.00</span></h5>
+                                        <h5>@lang('site.total'): ₹<span id="total-price">0.00</span></h5>
                                     </div>
                                     <div class="col-12 pt-3">
                                         <div class="form-group text-center">

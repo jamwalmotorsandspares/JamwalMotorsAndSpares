@@ -40,7 +40,6 @@
                                         <span
                                             class="label label-{{ $purchase->payment_status == 3 ? 'success' : ($purchase->payment_status == 2 ? 'warning' : 'danger') }}">{{ $purchase->status }}</span>
                                     @endif
-
                                 </div>
                             </div>
                             <div class="float-right">
@@ -88,19 +87,9 @@
                                             class="font-weight-bold text-uppercase">@lang('site.status'):</span><span
                                             class="ml-1">{{ $purchase->status }}</span></div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <h4 class="text-uppercase">@lang('site.from')</h4>
-                                    <div class="billed"><span
-                                            class="font-weight-bold text-uppercase">@lang('site.name'):</span><span
-                                            class="ml-1">{{ $purchase->supplier->name }}</span></div>
-                                    <div class="billed"><span
-                                            class="font-weight-bold text-uppercase">@lang('site.phone'):</span><span
-                                            class="ml-1">{{ $purchase->supplier->phone }}</span></div>
-
-                                </div>
-                                <div class="col-md-3">
-                                    <h4 class="text-uppercase">@lang('site.to')</h4>
-                                    <div class="billed"><span
+                                <div class="billed"><span
                                             class="font-weight-bold text-uppercase">@lang('site.name'):</span><span
                                             class="ml-1">{{ $setting->name }}</span></div>
                                     <div class="billed"><span
@@ -110,8 +99,18 @@
                                             class="font-weight-bold text-uppercase">@lang('site.address'):</span><span
                                             class="ml-1">{{ $setting->address }}</span></div>
                                 </div>
+                                <div class="col-md-2">
+                                    <h4 class="text-uppercase">@lang('site.to')</h4>
+                                     <div class="billed"><span
+                                            class="font-weight-bold text-uppercase">@lang('site.name'):</span><span
+                                            class="ml-1">{{ $purchase->supplier->name }}</span></div>
+                                    <div class="billed"><span
+                                            class="font-weight-bold text-uppercase">@lang('site.phone'):</span><span
+                                            class="ml-1">{{ $purchase->supplier->phone }}</span></div>
+
+                                </div>
                                 <div class="col-md-3 text-right mt-3">
-                                    <h4 class="text-primary mb-0">{{ $setting->name }}</h4><span>sparte-parts.com</span>
+                                    <h4 class="text-primary mb-0">{{ $setting->name }}</h4><span></span>
                                 </div>
                             </div>
                             <div class="mt-3">
@@ -133,9 +132,9 @@
                                                     <td><a
                                                             href="{{ route('dashboard.products.show', $product->id) }}">{{ $product->name }}</a>
                                                     </td>
-                                                    <td>${{ number_format($product->pivot->price, 2) }}</td>
+                                                    <td>₹ {{ number_format($product->pivot->price, 2) }}</td>
                                                     <td>{{ $product->pivot->quantity }}</td>
-                                                    <td>${{ number_format($product->pivot->price * $product->pivot->quantity, 2) }}
+                                                    <td>₹ {{ number_format($product->pivot->price * $product->pivot->quantity, 2) }}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -148,11 +147,11 @@
                                         <table class="table">
                                             <tr>
                                                 <th>@lang('site.total')</th>
-                                                <td>${{ number_format($purchase->total_price, 2) }}</td>
+                                                <td>₹ {{ number_format($purchase->total_price, 2) }}</td>
                                             </tr>
                                             <tr>
                                                 <th>@lang('site.amount_paid')</th>
-                                                <td>${{ number_format($purchase->amount_paid, 2) }}</td>
+                                                <td>₹ {{ number_format($purchase->amount_paid, 2) }}</td>
                                             </tr>
                                         </table>
                                     </div>

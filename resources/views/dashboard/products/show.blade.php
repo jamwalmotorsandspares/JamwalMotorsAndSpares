@@ -50,11 +50,11 @@
                                             </div>
                                             <div class="col-12 border-bottom pt-4 pb-2"><strong
                                                     class="float-left text-dark">@lang('site.purchase_price'):</strong>
-                                                <span class="pull-right">${{ $product->purchase_price }}</span>
+                                                <span class="pull-right">₹ {{ $product->purchase_price }}</span>
                                             </div>
                                             <div class="col-12 border-bottom pt-4 pb-2"><strong
                                                     class="float-left text-dark">@lang('site.sale_price'):</strong>
-                                                <span class="pull-right">${{ $product->price }}</span>
+                                                <span class="pull-right">₹ {{ $product->price }}</span>
                                             </div>
                                             <div class="col-12 border-bottom pt-4 pb-2"><strong
                                                     class="float-left text-dark">@lang('site.stock'):</strong>

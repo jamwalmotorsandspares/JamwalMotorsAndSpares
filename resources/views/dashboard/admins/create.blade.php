@@ -46,7 +46,7 @@
                                             <label>@lang('site.role')</label>
                                             <select class="custom-select mr-sm-2 @error('role') is-invalid @enderror" id="inlineFormCustomSelect" name="role">
                                                 <option  value="" selected>@lang('site.choose') @lang('site.role')...</option>
-                                                <option value="suber_admin">@lang('site.suber_admin')</option>
+                                                <option value="super_admin">@lang('site.super_admin')</option>
                                                 <option value="accountant">@lang('site.accountant')</option>
                                                 <option value="customer_service">@lang('site.customer_service')</option>
                                                 <option value="data_entry">@lang('site.data_entry')</option>

@@ -22,6 +22,7 @@ class CreateProductPurchaseTable extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('purchase_id')->references('id')->on('purchases')->onDelete('cascade');
             $table->primary(['product_id','purchase_id']);
+            $table->timestamps();
         });
     }
 

@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\FactoryCar;
 use App\Models\Car;
 use Illuminate\Http\Request;
+use App\Services\ActivityTracker;
 
 class ProductController extends Controller
 {
@@ -20,7 +21,8 @@ class ProductController extends Controller
         $countries = Product::select('country')->groupBy('country')->pluck('country');
         $products = Product::with(['category','brand'])
         ->when($request->search,function ($query) use ($request){ // if search
-            return $query->where('name_en','Like','%'.$request->search.'%')->OrWhere('name_ar','Like','%'.$request->search.'%');
+            return $query->where('name_en','Like','%'.$request->search.'%');
+            // ->OrWhere('name_ar','Like','%'.$request->search.'%');
         })->when($request->car_id,function ($query) use ($request){ // if car
             return $query->whereHas('car', function ($query) use ($request) {
                 $query->where('id',$request->car_id)->where('start_year','<=',$request->year)->where('end_year','>=',$request->year);
@@ -34,17 +36,23 @@ class ProductController extends Controller
         })->when($request->country,function ($q) use ($request){ // if country
             return $q->whereIn('country', json_decode($request->country));
         })->latest()->paginate(12);
+
+        ActivityTracker::track('PRODUCT_LIST');
+        
         return view('front.products.index', compact('products','brands','factoryCars','countries'));
     }
 
     public function show(Product $product)
     {
+        ActivityTracker::track('PRODUCT_VIEW');
         $products_silder = Product::inRandomOrder()->limit(6)->get();
+
         return view('front.products.show', compact('product','products_silder'));
     }
     public function getCarYearsAjax(Request $request)
     {
         $data['years'] = Car::where('factory_car_id',$request->factoryCarId)->get();
+        ActivityTracker::track('SEARCH_BY_CAR_YEARS');
     return json_encode($data);
     }
 

@@ -9,12 +9,13 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use App\Services\ActivityTracker;
 
 class CartController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('store');
     }
     /**
      * Display a listing of the resource.
@@ -29,11 +30,31 @@ class CartController extends Controller
         $sub_total = auth()->user()->products()->sum(\DB::raw('products.price * product_user.quantity'));
         $tax_amount = $sub_total * ($setting->tax / 100);
         $total_price = $sub_total + $tax_amount + $setting->shipping;
+        
+         ActivityTracker::track(
+            'VIEW_CART_LIST',
+            'Cart Product Listing.'
+        );
+
+
         return view('front.cart.index',compact('products','tax_amount','sub_total','total_price','products_silder'));
     }
 
     public function store(Request $request)
     {
+        if (!auth()->check()) {
+
+            $cart = session()->get('guest_cart', []);
+
+            $cart[] = [
+                'product_id' => $request->product_id,
+                'quantity'   => $request->quantity,
+            ];
+
+            session()->put('guest_cart', $cart);
+
+            return redirect()->route('login');
+        }
         $request->validate([
             'product_id' =>Rule::unique('product_user')->where(function ($query) use ($request) {
                 return $query->where('product_id', $request->product_id)
@@ -42,11 +63,17 @@ class CartController extends Controller
         ]);
         $checkStock = true;
         $product = Product::find($request->product_id);
-            $checkStock = $product->stock < $request->quantity;
+        $checkStock = $product->stock < $request->quantity;
 
         if($checkStock){
             return redirect()->back()->withErrors(["product_available" => __('site.product_available')])->withInput();
         }
+
+        ActivityTracker::track(
+            'ADD_TO_CART',
+            'Product added to cart',
+            $product
+        );
 
         auth()->user()->products()->attach($request->product_id,['quantity' => $request->quantity]);
         session()->flash('success', __('site.added_successfully'));
@@ -57,6 +84,11 @@ class CartController extends Controller
     {
         $products = $request->products ? $request->products : [];
         if($request->exists('clear')){
+             ActivityTracker::track(
+                    'CART_PRODUCT_REMOVED',
+                    'Cart Product removed'
+                );
+
             auth()->user()->products()->detach();
         }
 
@@ -71,6 +103,11 @@ class CartController extends Controller
                     'quantity'=> $request->quantity[$index],
                 ]);
             }
+
+              ActivityTracker::track(
+                    'CART_UPDATED',
+                    'Product cart updated'
+                );
         }
 
         return redirect()->back();

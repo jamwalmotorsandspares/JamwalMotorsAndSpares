@@ -20,13 +20,13 @@ class ExportBrand implements FromCollection, WithHeadings, WithMapping
 
     public function map($brands) : array {
         return [
-            $brands->name_ar,
+            // $brands->name_ar,
             $brands->name_en,
         ] ;
     }
 
     public function headings(): array
     {
-        return ["name_ar", "name_en"];
+        return ["name_en"]; //["name_ar"]
     }
 }

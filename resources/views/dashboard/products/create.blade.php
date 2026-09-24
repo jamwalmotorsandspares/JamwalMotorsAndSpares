@@ -35,15 +35,15 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-row">
-                                    <div class="col-sm-6">
+                                    {{-- <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>@lang('site.ar.name')</label>
                                             <input type="text"
                                                 class="form-control @error('name_ar') is-invalid @enderror" name="name_ar"
                                                 value="{{ old('name_ar') }}" autofocus>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
+                                    </div> --}}
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>@lang('site.en.name')</label>
                                             <input type="text"
@@ -75,9 +75,8 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>@lang('site.country')</label>
-                                            <select class="single-select @error('country') is-invalid @enderror"
-                                                name="country" id="country">
-                                            </select>
+                                            <input type="text" class="form-control @error('country') is-invalid @enderror"
+                                                name="country" value="{{ old('country') ?? "India" }}">
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
@@ -134,13 +133,13 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    {{-- <div class="col-sm-12 col-md-6">
                                         <div class="form-group">
                                             <label>@lang('site.ar.description')</label>
                                             <textarea name="description_ar" id="summernote-description-ar">{{ old('description_ar') }}</textarea>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    </div> --}}
+                                    <div class="col-sm-12 col-md-12">
                                         <div class="form-group">
                                             <label>@lang('site.en.description')</label>
                                             <textarea name="description_en" id="summernote-description-en">{{ old('description_en') }}</textarea>
@@ -190,13 +189,16 @@
     <!-- Select 2 init -->
     <script src="{{ asset('dashboard/assets/js/plugins-init/select2-init.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/custom-init/select2-init.js') }}"></script>
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function() {
             // ajax get countries
             $.ajax({
-                url: 'https://restcountries.com/v3.1/all',
+                url: 'https://api.restcountries.com/countries/v5?q=canada',
                 dataType: "json",
                 method: "get",
+                headers: {
+                    'Authorization': 'Bearer rc_live_f636114c9ce848b28200557c5395a986'
+                },
                 success: function(data) {
                     var countries = [];
                     for (var i = 0; i < data.length; i++) {
@@ -207,5 +209,5 @@
                 }
             }); // end ajax get countries
         });
-    </script>
+    </script> --}}
 @endpush

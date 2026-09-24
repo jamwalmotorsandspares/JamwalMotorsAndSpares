@@ -51,7 +51,7 @@
                                         @foreach ($reports as $index => $report)
                                             <tr>
                                                 <td>{{ $index + 1 }}</td>
-                                                <td>${{ number_format($report->orders_amount, 2) }}</td>
+                                                <td>₹ {{ number_format($report->orders_amount, 2) }}</td>
                                                 <td>{{ $report->orders_count }}</td>
                                                 <td>{{ $report->created_at->format('M d, Y') }}</td>
                                                 <td>{{ $report->updated_at->format('M d, Y') }}</td>

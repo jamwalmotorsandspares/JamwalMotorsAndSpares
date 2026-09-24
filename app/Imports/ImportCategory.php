@@ -19,7 +19,7 @@ class ImportCategory implements ToModel, WithValidation,WithHeadingRow
     public function model(array $row)
     {
         return new Category([
-            'name_ar' => $row['name_ar'],
+            // 'name_ar' => $row['name_ar'],
             'name_en' => $row['name_en'],
         ]);
     }
@@ -27,7 +27,7 @@ class ImportCategory implements ToModel, WithValidation,WithHeadingRow
     public function rules(): array
     {
         return [
-            'name_ar' => 'required|string|max:50|unique:categories,name_ar',
+            // 'name_ar' => 'required|string|max:50|unique:categories,name_ar',
             'name_en' => 'required|string|max:50|unique:categories,name_en',
         ];
     }

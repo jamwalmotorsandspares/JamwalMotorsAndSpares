@@ -140,6 +140,28 @@
 
     </div>
     <!--page-wrapper-->
+@push('js')
+<script>
+    window.addEventListener('popstate', function () {
+
+    $.ajax({
+        url: "{{ route('visitor.navigation') }}",
+        type: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            url: window.location.href,
+            action: 'back_forward'
+        }
+    });
+    });
+ </script>
+<script>
+// load notification after 5 Sec
+setInterval(function () {
+    loadNotifications();
+}, 5000);
+    </script>
+@endpush
 </body>
 
 </html>

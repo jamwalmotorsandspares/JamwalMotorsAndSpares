@@ -20,13 +20,13 @@ class ExportFactoryCar implements FromCollection, WithHeadings, WithMapping
 
     public function map($factoryCars) : array {
         return [
-            $factoryCars->name_ar,
+            // $factoryCars->name_ar,
             $factoryCars->name_en,
         ] ;
     }
 
     public function headings(): array
     {
-        return ["name_ar", "name_en"];
+        return ["name_en"]; //["name_ar",]
     }
 }

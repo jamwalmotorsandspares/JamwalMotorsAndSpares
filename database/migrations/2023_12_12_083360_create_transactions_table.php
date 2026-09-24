@@ -22,6 +22,7 @@ class CreateTransactionsTable extends Migration
             $table->string('source_type',50);
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

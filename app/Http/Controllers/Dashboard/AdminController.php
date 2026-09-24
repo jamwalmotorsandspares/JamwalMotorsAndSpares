@@ -47,7 +47,7 @@ class AdminController extends Controller
             'name' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:admins'],
             "phone"=>"required|digits:11",
-            'role' => ['required', 'string', 'in:suber_admin,accountant,customer_service,data_entry'],
+            'role' => ['required', 'string', 'in:super_admin,accountant,customer_service,data_entry'],
             'password' => ['required', 'string', 'min:8','max:50', 'confirmed'],
         ]);
         $request_data = $request->except(['password','password_confirmation']);
@@ -93,7 +93,7 @@ class AdminController extends Controller
         $rules = [
             'name' => ['required', 'string', 'max:50','regex:/^\S*$/u'],
             "phone"=>"required|digits:11",
-            'role' => ['string', 'in:suber_admin,accountant,customer_service,data_entry'],
+            'role' => ['string', 'in:super_admin,accountant,customer_service,data_entry'],
         ];
         if(isset($request->password)){
             $rules += [

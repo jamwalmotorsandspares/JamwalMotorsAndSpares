@@ -33,7 +33,7 @@
                 </div>
                 @endif
                 <ul class="list-inline m-0 social-icons">
-                    <li class="list-inline-item"><a href="#;" target="_blank" title="Facebook"><i class="cpb cp-facebook-f"></i></a></li>
+                    <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=61590280230384" target="_blank" title="Facebook"><i class="cpb cp-facebook-f"></i></a></li>
                     <li class="list-inline-item"><a href="#;" target="_blank" title="Twitter"><i class="cpb cp-twitter"></i></a></li>
                     <li class="list-inline-item"><a href="#;" target="_blank" title="Instagram"><i class="cpb cp-instagram"></i></a></li>
                     <li class="list-inline-item"><a href="#;" target="_blank" title="Google Plus"><i class="cpb cp-google-plus"></i></a></li>

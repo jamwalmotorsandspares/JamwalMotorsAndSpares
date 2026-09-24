@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Order;
+use App\Models\Product;
+use App\Models\User;
+use App\Models\Admin;
 use App\Traits\ReportTrait;
+use App\Traits\InvoiceTrait;
 use App\Exports\ExportOrder;
 // Exel Order
 use Illuminate\Http\Request;
 use App\Exports\ExportOrderInvoice;
+use App\Notifications\NewOrderNotification;
 use App\Http\Controllers\Controller;
 // ./
 use Maatwebsite\Excel\Facades\Excel;
@@ -15,7 +20,8 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-    use ReportTrait;
+    use InvoiceTrait,ReportTrait;
+
     public function index(Request $request)
     {
         $this->authorize('check-permissions', 'read_orders');
@@ -43,6 +49,75 @@ class OrderController extends Controller
         })->latest()->paginate(10);
         return view('dashboard.orders.index', compact('orders'));
     }
+
+     public function create()
+    {
+        $this->authorize('check-permissions', 'create_orders');
+        $clients = User::all();
+        return view('dashboard.orders.create',compact('clients'));
+    }
+
+    public function store(Request $request)
+    {
+
+      $validator = Validator::make($request->all(), [
+            'client' => 'required',
+            'products' => 'required|array|min:1',
+            'products.*' => 'required',
+            'products.*.quantity' => 'required|integer|min:1',
+            'products.*.price' => 'required|numeric|min:0',
+            'payment_type' => 'required',
+            'payment_method' => 'required',
+        ]);
+
+$validator->after(function ($validator) use ($request) {
+
+        $productIds = collect($request->products)->keys()->toArray();
+        $products = Product::whereIn('id', $productIds)
+            ->get()
+            ->keyBy('id');
+
+        foreach ($request->products as $productId => $item) {
+            $product = $products->get($productId);
+
+            $quantity = (int) $item['quantity'];
+            if ($quantity > $product->stock) {
+                  $validator->errors()->add(
+                "products.$productId.quantity",
+                "Only {$product->stock} units of {$product->name_en} are available."
+            );
+            }
+        }
+        });
+        $validator->validate();
+        $nextInvoiceNumber = $this->OrderInvoiceIncrement();
+        $order = Order::create([
+            'user_id' => $request->client,
+            'invoice_no' => $nextInvoiceNumber,
+        ]);
+        $order->products()->attach($request->products);
+        $total_price = 0;
+        // start foreach
+        foreach ($request->products as $purchase_product) {
+            $total_price +=  $purchase_product['price'] * $purchase_product['quantity'];
+        }//end foreach
+
+        // start update order data table
+        $order->update([
+            'total_price' => $total_price,
+            'payment_method' => $request->payment_method,
+        ]);// end update order data table
+
+        //admin notification
+        $admins = Admin::where('role', 'super_admin')->first();
+
+        // foreach ($admins as $admin) {
+            $admins->notify(new NewOrderNotification($order));
+        // }
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('dashboard.orders.show',$order->id);
+    }
+
 
     public function show(Order $order)
     {
@@ -88,7 +163,7 @@ class OrderController extends Controller
                     ]);
                     $products_qyt = $product->pivot->quantity;
                     $products_price = $product->pivot->price * $products_qyt;
-                    $this->ReportSaleIncrement(-$products_price,-$products_qyt);
+                    $this->ReportSaleIncrement($products_price,$products_qyt);
                     $product->update([
                         'stock' => $product->stock +  $product->pivot->quantity,
                     ]);
@@ -117,4 +192,49 @@ class OrderController extends Controller
     {
         return Excel::download(new ExportOrderInvoice($id), 'invoices.xlsx');
     }
+
+     public function active(Order $order)
+    {
+        // start stock area
+        foreach ($order->products as $index => $product) {
+            $products_qyt = $product->pivot->quantity;
+            $products_price = $product->pivot->price * $products_qyt;
+            if($order->payment_status == 2){ // if order payment status pending
+                // update daily report
+                $this->ReportSaleIncrement($products_price,$products_qyt);
+                $product->update([
+                    'stock' => $product->stock - $product->pivot->quantity,
+                        ]);
+
+            }else{ // if order payment type return
+                // update daily report
+                $this->ReportSaleIncrement($products_price,$products_qyt);
+                  // pricing policy
+                $balance_value = $product->stock * $product->purchase_price;
+                $new_balance_value = $product->pivot->quantity * $product->pivot->price;
+                $total_balance_value = $balance_value + $new_balance_value;
+                $total_quantity = $product->pivot->quantity + $product->stock;
+                // pricing policy end
+                $product->update([
+                'stock' => $product->stock + $product->pivot->quantity,
+                'purchase_price' => $total_balance_value / $total_quantity,
+                    ]);
+            }
+        }// end stock area
+
+            // order area
+            $order->update([
+                'payment_status'=> 1,
+                'tracking'=> 5,
+                'address'=> $order->user->street.",".$order->user->city,
+                'building'=> $order->user->building,
+                'apartment'=> $order->user->apartment,
+                'floor'=> $order->user->floor,
+                'user_id'=>$order->user_id,
+            ]);
+            // end order area
+        session()->flash('success', __('site.added_successfully'));
+        return redirect()->route('dashboard.orders.show',$order->id);
+    }
+
 }

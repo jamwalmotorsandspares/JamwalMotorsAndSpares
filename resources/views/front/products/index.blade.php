@@ -105,7 +105,7 @@
                                                                 href="{{ route('products.show', $product->id) }}">{{ $product->name .' - '.$product->car->name.' ('.$product->car->start_year.'-'.$product->car->end_year.')' }}</a>
                                                         </div>
                                                         <div class="price-box"><span
-                                                                class="price">${{ number_format($product->price, 2) }}</span>
+                                                                class="price">₹{{ number_format($product->price, 2) }}</span>
                                                         </div>
                                                     </div>
                                                 </div>

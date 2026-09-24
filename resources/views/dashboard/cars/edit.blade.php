@@ -29,14 +29,14 @@
                                 {{ csrf_field() }}
                                 {{ method_field('put') }}
                                 <div class="form-row">
-                                    <div class="col-sm-6">
+                                    {{-- <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>@lang('site.ar.name')</label>
                                             <input type="text"
                                                 class="form-control @error('name_ar') is-invalid @enderror" name="name_ar"
                                                 value="{{ $car->name_ar }}" autofocus>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>@lang('site.en.name')</label>
@@ -73,7 +73,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>@lang('site.factory') @lang('site.car')</label>
                                             <select name="factory_car_id" class="single-select"  >

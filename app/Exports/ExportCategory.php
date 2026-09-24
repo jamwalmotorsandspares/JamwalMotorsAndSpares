@@ -20,13 +20,13 @@ class ExportCategory implements FromCollection, WithHeadings, WithMapping
 
     public function map($categories) : array {
         return [
-            $categories->name_ar,
+            // $categories->name_ar,
             $categories->name_en,
         ] ;
     }
 
     public function headings(): array
     {
-        return ["name_ar", "name_en"];
+        return ["name_en"]; //"name_ar",
     }
 }

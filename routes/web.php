@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['prefix' => LaravelLocalization::setLocale(),
-'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]],
+'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ],['TrackPageActivity']],
 function(){
     Auth::routes();
 
-    Route::get('/', 'HomeController@index');
+    Route::get('/', 'HomeController@index')->name('home');
     // products routes
     Route::get('/products', 'ProductController@index')->name('products.index');
     Route::get('/products/{product}', 'ProductController@show')->name('products.show');
@@ -30,5 +30,16 @@ function(){
     // checkout routes
     Route::resource('checkout', 'CheckoutController')->only(['create','store']);
     Route::get('/callback', 'CheckoutController@callback')->name('callback');
+    Route::get('/latest-order', 'CheckoutController@latestOrder')->name('order.latest');
 
 });
+
+Route::post('/visitor/navigation','VisitorHistoryController@navigation')->name('visitor.navigation');
+
+
+// Route::get('/payment/razorpay/create-order/{order}','RazorpayController@createOrder')->name('razorpay.createOrder');
+Route::post('/payment/razorpay/create-order','RazorpayController@createOrder')->name('razorpay.createOrder');
+
+Route::post('/payment/razorpay/verify','RazorpayController@verify')->name('razorpay.verify');
+
+Route::post('/payment/razorpay/webhook','RazorpayController@webhook')->name('razorpay.webhook');

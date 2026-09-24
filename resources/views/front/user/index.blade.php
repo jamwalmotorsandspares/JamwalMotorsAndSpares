@@ -98,7 +98,7 @@
                                                             {{ $order->status }}</td>
                                                         <td>{{ $order->payment_method ? __('site.online') : __('site.cash') }}
                                                         </td>
-                                                        <td>${{ number_format($order->total_price, 2) }}</td>
+                                                        <td>₹{{ number_format($order->total_price, 2) }}</td>
                                                         <td class="text-center"><a class="view"
                                                                 href="{{ route('orders.show', $order->id) }}"><u>View</u></a>
                                                         </td>

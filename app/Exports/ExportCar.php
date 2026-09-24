@@ -20,7 +20,7 @@ class ExportCar implements FromCollection, WithHeadings, WithMapping
 
     public function map($cars) : array {
         return [
-            $cars->name_ar,
+            // $cars->name_ar,
             $cars->name_en,
             $cars->start_year,
             $cars->end_year,
@@ -30,6 +30,6 @@ class ExportCar implements FromCollection, WithHeadings, WithMapping
 
     public function headings(): array
     {
-        return ["name_ar", "name_en","start_year","end_year","factory_car"];
+        return ["name_en","start_year","end_year","factory_car"]; //["name_ar",]
     }
 }

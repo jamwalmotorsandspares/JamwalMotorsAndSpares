@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['prefix' => LaravelLocalization::setLocale(),
-'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]],
+'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ],['TrackPageActivity']],
 function(){
 Route::group(['prefix' => 'dashboard','as' => 'dashboard.'],
 function(){
@@ -44,9 +44,11 @@ function(){
         Route::post('/purchases/{purchase}/active','PurchaseController@active')->name('purchases.active');
         Route::get('/export-invoice-purchase/{id}','PurchaseController@exportInvoicePurchase')->name('export-invoice-purchase');
         //routes users
-        Route::resource('clients', 'ClientController')->only(['index','show']);
+        Route::resource('clients', 'ClientController');   //->only(['index','show'])
         // routes orders
         Route::resource('orders', 'OrderController');
+
+        Route::post('/orders/{order}/active','OrderController@active')->name('orders.active');
         Route::get('/export-orders','OrderController@exportOrders')->name('export-orders');
         Route::get('/report-orders','OrderReportController@index')->name('report-orders');
         Route::get('/export-invoice-order/{id}','OrderController@exportInvoiceOrder')->name('export-invoice-order');
@@ -69,8 +71,57 @@ function(){
         Route::get('/export-brands','BrandController@exportBrands')->name('export-brands');
         // products routes
         Route::resource('products', 'ProductController');
+        Route::get('/product/{product}/stock', [ProductController::class, 'checkStock'])
+        ->name('product.stock');
         Route::post('/import-products','ProductController@import')->name('import-products');
         Route::get('/export-products','ProductController@exportProducts')->name('export-products');
+
+//notifications
+
+        Route::get('/notifications', 'NotificationController@index')->name('notifications.index');
+        Route::get('/notifications/{id}/read','NotificationController@markAsRead')->name('notification.read');
+        Route::post('/notifications/read-all','NotificationController@readAll')->name('notifications.readAll');
+        // Route::post('/notifications/{id}/unread', 'NotificationController@markAsUnread')->name('notifications.unread');
+        Route::get('/notifications/latest', function () {
+            return response()->json([
+                'count' => auth()->user()->unreadNotifications()->count(),
+                'notifications' => auth()->user()
+                    ->notifications()
+                    ->latest()
+                    ->limit(10)
+                    ->get()
+                    ->map(function ($notification) {
+                        return [
+                            'id' => $notification->id,
+                            'title' => $notification->data['title'] ?? 'Notification',
+                            'message' => $notification->data['message'] ?? '',
+                            'url' => $notification->data['url'] ?? '#',
+                            'read' => $notification->read_at !== null,
+                            'time' => $notification->created_at->diffForHumans(),
+                        ];
+                    })
+            ]);
+        })->name('notifications.latest');
+
+        // Route::post('/notifications/{id}/read', function ($id) {
+        // dd($id);
+        //     $notification = auth()->user()
+        //         ->notifications()
+        //         ->where('id', $id)
+        //         ->first();
+
+        //     if ($notification) {
+        //         $notification->markAsRead();
+        //     }
+
+        //     return response()->json([
+        //         'success' => true
+        //     ]);
+
+        // });
+
+        Route::get('/dashboard/my-history','VisitorHistoryController@history')->name('dashboard.my-history');
+        Route::post('/dashboard/visitor/navigation','VisitorHistoryController@navigation')->name('visitor.navigation');
     });
 
 });

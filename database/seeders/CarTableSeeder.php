@@ -17,14 +17,14 @@ class CarTableSeeder extends Seeder
     {
 
         // $faker = Factory::create();
-        $carsHyundaiAr = ['اكسنت اتش سي','اكسنت بي ان 7','الينترا سي ان 7','كريتا'];
+        // $carsHyundaiAr = ['اكسنت اتش سي','اكسنت بي ان 7','الينترا سي ان 7','كريتا'];
         $carsHyundaiEn = ['Accent HC','Accent BN7','Elantra CN7','Creta'];
         $carsStartYear = [1994,1994,2020,1994,2014];
         $carsEndYear = [2017,2023,2023,2017,2019];
-        foreach ($carsHyundaiAr as $i => $carHyundaiAr) {
+        foreach ($carsHyundaiEn as $i => $carsHyundaiEn) {
             Car::create([
                 'name_en' => $carsHyundaiEn[$i],
-                'name_ar' => $carsHyundaiAr[$i],
+                // 'name_ar' => $carsHyundaiAr[$i],
                 'start_year' => $carsStartYear[$i],
                 'end_year' => $carsEndYear[$i],
                 'factory_car_id' => 1,

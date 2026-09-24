@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="priceRow">
                                         <div class="product-price">
-                                            <span>$59.00</span>
+                                            <span>₹59.00</span>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="priceRow">
                                         <div class="product-price">
-                                            <span>$89.00</span>
+                                            <span>₹89.00</span>
                                         </div>
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="priceRow">
                                         <div class="product-price">
-                                            <span>$89.00</span>
+                                            <span>₹89.00</span>
                                         </div>
                                     </div>
                                 </div>
@@ -105,15 +105,15 @@
                 <div class="minicart-bottom">
                     <div class="subtotal list">
                         <span>Shipping:</span>
-                        <span class="product-price">$10.00</span>
+                        <span class="product-price">₹10.00</span>
                     </div>
                     <div class="subtotal list">
                         <span>Tax:</span>
-                        <span class="product-price">$05.00</span>
+                        <span class="product-price">₹05.00</span>
                     </div>
                     <div class="subtotal">
                         <span>Total:</span>
-                        <span class="product-price">$93.13</span>
+                        <span class="product-price">₹93.13</span>
                     </div>
                     <button type="button" class="btn proceed-to-checkout rounded">Checkout</button>
                     <button type="button" class="btn btn-secondary cart-btn rounded">View Cart</button>

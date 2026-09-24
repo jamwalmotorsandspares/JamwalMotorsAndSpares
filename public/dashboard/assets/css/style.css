@@ -3,13 +3,13 @@
 Table of Sass Contents
 
 1. Abstracts
-    _bs-custom.scss 
+    _bs-custom.scss
     _inheritance.scss
     _maps.scss
     _mixin.scss
     _variable.scss
 
-2. bootstrap 
+2. bootstrap
     -Here goes all official bootstrap scss files
 
 3. Global/Base
@@ -4432,7 +4432,7 @@ a.close.disabled {
   .bs-popover-top .arrow::before, .bs-popover-auto[x-placement^="top"] .arrow::before {
     bottom: 0;
     border-top-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-top .arrow::after,
   .bs-popover-auto[x-placement^="top"] .arrow::after {
     bottom: 1px;
@@ -4452,7 +4452,7 @@ a.close.disabled {
   .bs-popover-right .arrow::before, .bs-popover-auto[x-placement^="right"] .arrow::before {
     left: 0;
     border-right-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-right .arrow::after,
   .bs-popover-auto[x-placement^="right"] .arrow::after {
     left: 1px;
@@ -4469,7 +4469,7 @@ a.close.disabled {
   .bs-popover-bottom .arrow::before, .bs-popover-auto[x-placement^="bottom"] .arrow::before {
     top: 0;
     border-bottom-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-bottom .arrow::after,
   .bs-popover-auto[x-placement^="bottom"] .arrow::after {
     top: 1px;
@@ -4498,7 +4498,7 @@ a.close.disabled {
   .bs-popover-left .arrow::before, .bs-popover-auto[x-placement^="left"] .arrow::before {
     right: 0;
     border-left-color: rgba(0, 0, 0, 0.25); }
-  
+
   .bs-popover-left .arrow::after,
   .bs-popover-auto[x-placement^="left"] .arrow::after {
     right: 1px;
@@ -16988,4 +16988,89 @@ button {
 .basic-filled-in-checkboxes .form-check {
   flex-basis: 14.28571%; }
 
+
 /*# sourceMappingURL=style.css.map */
+/* notification bell icon css */
+.notification-bell {
+    font-size: 20px;
+    position: relative;
+}
+
+.notification-count {
+    position: absolute;
+    top: 2px;
+    right: 0px;
+    font-size: 10px;
+    border-radius: 50%;
+}
+
+.notification-dropdown {
+    width: 350px;
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.notificationItem {
+    white-space: normal;
+    padding: 12px 15px;
+    height:10rem;
+}
+
+.notificationItem:hover {
+    background: #f5f5f5;
+}
+
+.notificationItem.unread {
+    background: #eef6ff;
+    font-weight: 600;
+}
+
+.dropdown-header.text-center{
+    text-align: center !important;
+    background-color: #828aea;
+}
+.notificationItem.read {
+    background: #fff;
+    font-weight: normal;
+}
+
+/* Ringing animation */
+
+.notification-bell.ringing {
+    animation: bell-ring 0.8s ease-in-out;
+}
+
+@keyframes bell-ring {
+
+    0% {
+        transform: rotate(0);
+    }
+
+    15% {
+        transform: rotate(15deg);
+    }
+
+    30% {
+        transform: rotate(-15deg);
+    }
+
+    45% {
+        transform: rotate(12deg);
+    }
+
+    60% {
+        transform: rotate(-12deg);
+    }
+
+    75% {
+        transform: rotate(8deg);
+    }
+
+    90% {
+        transform: rotate(-8deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}

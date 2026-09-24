@@ -18,7 +18,7 @@ class Brand extends Model
     {
         return $this->hasMany(Product::class);
     }
-    
+
     public function getNameAttribute(){
         return app()->getLocale() == 'ar' ? $this->name_ar : $this->name_en;
     }

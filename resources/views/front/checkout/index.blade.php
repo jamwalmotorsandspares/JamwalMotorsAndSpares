@@ -3,9 +3,8 @@
     <meta name="address-governorates" content="{{ asset('assets/json/governorates.json') }}">
     <meta name="address-governorate" content="{{ Auth::user()->governorate }}">
     <meta name="address-city" content="{{ Auth::user()->city }}">
-@endpush
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @section('body')
-
     <body class="product-page">
     @endsection
     @section('content')
@@ -75,7 +74,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 mb-2">
-                                                        <label for="input-postcode" class="form-label">@lang('site.street')
+                                                        <label for="input-street" class="form-label">@lang('site.street')
                                                             <span class="required">*</span></label>
                                                         <input name="street" value="{{ Auth::user()->street }}"
                                                             id="input-street" type="text"
@@ -87,7 +86,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 mb-2">
-                                                        <label for="input-postcode" class="form-label">@lang('site.building')
+                                                        <label for="input-building" class="form-label">@lang('site.building')
                                                             <span class="required">*</span></label>
                                                         <input name="building" value="{{ Auth::user()->building }}"
                                                             id="input-building" type="text"
@@ -101,7 +100,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 mb-2">
-                                                        <label for="input-postcode" class="form-label">@lang('site.apartment')
+                                                        <label for="input-apartment" class="form-label">@lang('site.apartment')
                                                             <span class="required">*</span></label>
                                                         <input name="apartment" value="{{ Auth::user()->apartment }}"
                                                             id="input-apartment" type="text"
@@ -113,7 +112,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 mb-2">
-                                                        <label for="input-postcode" class="form-label">@lang('site.floor')
+                                                        <label for="input-floor" class="form-label">@lang('site.floor')
                                                             <span class="required">*</span></label>
                                                         <input name="floor" value="{{ Auth::user()->floor }}"
                                                             id="input-floor" type="text"
@@ -127,7 +126,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="form-group col-12 col-sm-6 col-md-6 col-lg-6 mb-2">
-                                                        <label for="input-postcode" class="form-label">@lang('site.phone')
+                                                        <label for="input-phone" class="form-label">@lang('site.phone')
                                                             <span class="required">*</span></label>
                                                         <input name="phone" value="{{ Auth::user()->phone }}"
                                                             id="input-phone" type="text"
@@ -160,6 +159,7 @@
                                                 {{ $message }}
                                             </div>
                                         @enderror
+                                       
                                         <div class="table-responsive-sm order-table">
                                             <table class="table table-hover text-center">
                                                 <thead>
@@ -173,7 +173,7 @@
                                                         <tr>
                                                             <td class="text-start">{{ $product->name }}</td>
                                                             <td class="text-start">
-                                                                ${{ number_format($product->price * $product->pivot->quantity, 2) }}
+                                                                ₹{{ number_format($product->price * $product->pivot->quantity, 2) }}
                                                             </td>
                                                         </tr>
                                                     @endforeach
@@ -182,30 +182,30 @@
                                                     <tr>
                                                         <td class="text-start text-uppercase"><b>@lang('site.subTotal')</b>
                                                         </td>
-                                                        <td class="text-start">${{ number_format($sub_total, 2) }}</td>
+                                                        <td class="text-start">₹{{ number_format($sub_total, 2) }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-start text-uppercase"><b>Tax</b></td>
-                                                        <td class="text-start">${{ number_format($tax_amount, 2) }}</td>
+                                                        <td class="text-start">₹{{ number_format($tax_amount, 2) }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-start text-uppercase"><b>@lang('site.shipping')</b>
                                                         </td>
                                                         <td class="text-start">
-                                                            {{ $setting->shipping > 0 ? '$' . $setting->shipping : __('site.free') . ' ' . __('site.shipping') }}
+                                                            {{ $setting->shipping > 0 ? '₹' . $setting->shipping : __('site.free') . ' ' . __('site.shipping') }}
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-start text-uppercase"><b>@lang('site.total')</b>
                                                         </td>
                                                         <td class="text-start red-text">
-                                                            <b>${{ number_format($total_price, 2) }}</b>
+                                                            <b>₹{{ number_format($total_price, 2) }}</b>
                                                         </td>
                                                     </tr>
                                                 </tfoot>
                                             </table>
                                         </div>
-
+                                    
                                         <div class="your-payment mt-4">
                                             <h2 class="title text-uppercase">@lang('site.payment_method')</h2>
                                             <div class="payment-method">
@@ -221,13 +221,16 @@
                                                             value="online">
                                                         <label for="option-2" class="mx-2">@lang('site.online_payment')</label>
                                                     </li>
+                                                
+                                                    
                                                 </ul>
                                                 <div class="order-button-payment mt-4 clearfix">
-                                                    <button type="submit"
-                                                        class="btn btn-primary btn-lg rounded-pill w-100">@lang('site.place_order')</button>
+                                               
+                                                <div class="order-button-payment mt-4 clearfix">
+                                                    <button type="submit"  class="btn btn-primary btn-lg rounded-pill w-100">@lang('site.place_order')</button>
                                                 </div>
-
-                                            </div>
+                                               
+                                            </div>          
                                         </div>
                                     </div>
                                 </div>
@@ -238,9 +241,9 @@
                 </div>
             </div>
             <!--End Checkout Content-->
-
         </main>
     @endsection
     @push('js')
         <script src="{{ asset('assets/js/address.js') }}"></script>
+        {{-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script> --}}
     @endpush

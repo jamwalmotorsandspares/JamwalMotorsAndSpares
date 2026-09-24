@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('dashboard/assets/images/favicon.png') }}">
-    <title>Gleek - Bootstrap Admin Dashboard HTML Template</title>
+    <title>JAMWAL MOTORS AND SPARES</title>
     <!-- Custom Stylesheet -->
     <link href="{{ asset('dashboard/assets/css/style.css') }}" rel="stylesheet">
 

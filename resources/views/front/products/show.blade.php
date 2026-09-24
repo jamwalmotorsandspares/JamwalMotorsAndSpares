@@ -112,7 +112,7 @@
                                             </div>
                                             <div class="price-box">
                                                 <span class="visually-hidden">Regular price</span>
-                                                <span class="sale-price">${{ number_format($product->price, 2) }}</span>
+                                                <span class="sale-price">₹{{ number_format($product->price, 2) }}</span>
                                             </div>
 
                                             <div class="sort-description">
@@ -266,7 +266,7 @@
                                                 href="{{ route('products.show', $product_silder->id) }}">{{ $product_silder->name }} {{ $product_silder->car->name.' ('.$product_silder->car->start_year.'-'.$product_silder->car->end_year.')' }}</a>
                                         </div>
                                         <div class="price-box"><span
-                                                class="price">${{ number_format($product_silder->price, 2) }}</span>
+                                                class="price">₹{{ number_format($product_silder->price, 2) }}</span>
                                         </div>
                                     </div>
                                 </div>

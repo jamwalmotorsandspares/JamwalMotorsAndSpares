@@ -27,7 +27,7 @@ class PermissionsTableSeeder extends Seeder
     {
         $permissions = [];
         $maps = ['create','read','update','delete'];
-        $models = ['admins','users','orders','categories','products','brands','cars'];
+        $models = ['admins','users','orders','categories','products','brands','cars','clients'];
         foreach($models as $model){
             foreach($maps as $map){
                 $permissions[] = $map . '_' . $model;

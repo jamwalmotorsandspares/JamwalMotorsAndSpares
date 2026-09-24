@@ -13,8 +13,8 @@
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                     <!--Desktop Logo-->
                     <a class="logo" href="{{ url('/') }}"><img src="{{ asset('uploads/company') . '/' . $setting->image }}"
-                            alt="Tacko - Auto Parts eCommerce Bootstrap5 Html Template"
-                            title="Tacko - Auto Parts eCommerce Bootstrap5 Html Template" /></a>
+                            alt="JMS - Auto Parts on JAMWAL MOTORS AND SPARES"
+                            title="JMS - Auto Parts on JAMWAL MOTORS AND SPARES" style="border-radius:10%;object-fit:cover;" /></a>
                     <!--End Desktop Logo-->
                 </div>
                 <div class="col-4 col-sm-4 col-md-6 col-lg-5 col-xl-6 prs-0 d-none d-lg-block">

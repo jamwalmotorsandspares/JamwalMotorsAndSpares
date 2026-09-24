@@ -28,6 +28,7 @@
                                     <a href="{{route('dashboard.suppliers.create')}}" class="btn btn-primary mb-2">{{ __('site.create') }}</a>
                                     <button type="button" class="btn btn-primary mb-2" data-toggle="modal"
                                         data-target="#filterModal">{{ __('site.filter') }}</button>
+
                                     <form action="{{ route('dashboard.suppliers.destroy', 'delete') }}" method="post"
                                         style="display: inline;">
                                         {{ csrf_field() }}
@@ -60,8 +61,8 @@
                                                 <td><a href="#">{{ $supplier->name }}</a></td>
                                                 <td>{{ $supplier->phone }}</td>
                                                 <td>{{ $supplier->status }}</td>
-                                                <td>${{ number_format($supplier->start_account, 2)  }}</td>
-                                                <td>${{ number_format($supplier->current_account, 2)  }}</td>
+                                                <td>₹{{ number_format($supplier->start_account, 2)  }}</td>
+                                                <td>₹{{ number_format($supplier->current_account, 2)  }}</td>
                                                 <td>
                                                     <span>
                                                         <a href="{{ route('dashboard.suppliers.edit', $supplier->id) }}"

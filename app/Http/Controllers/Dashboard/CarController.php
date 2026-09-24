@@ -29,7 +29,8 @@ class CarController extends Controller
         $this->authorize('check-permissions', 'read_cars');
         $factoryCars = FactoryCar::all();
         $cars = Car::with('FactoryCar')->when($request->search,function ($query) use ($request){
-            return $query->where('name_en','Like','%'.$request->search.'%')->orWhere('name_ar','Like','%'.$request->search.'%');
+            return $query->where('name_en','Like','%'.$request->search.'%');
+            // ->orWhere('name_ar','Like','%'.$request->search.'%');
         })->when($request->factory_car_id,function ($q) use ($request){
             return $q->where('factory_car_id', $request->factory_car_id);
         })->latest('id')->paginate(10);
@@ -58,7 +59,7 @@ class CarController extends Controller
     {
         $this->authorize('check-permissions', 'create_cars');
         $request->validate([
-            'name_ar' => 'required|max:50',
+            // 'name_ar' => 'required|max:50',
             'name_en' => 'required|max:50',
             'start_year' => 'required|digits:4|integer|min:1900|max:'.$request->end_year,
             'end_year' => 'required|digits:4|integer|min:1900|max:'.date("Y"),
@@ -88,7 +89,7 @@ class CarController extends Controller
         $this->authorize('check-permissions', 'update_cars');
 
         $request->validate([
-            'name_ar' => 'required|max:50',
+            // 'name_ar' => 'required|max:50',
             'name_en' => 'required|max:50',
             'start_year' => 'required|digits:4|integer|min:1900|max:'.$request->end_year,
             'end_year' => 'required|digits:4|integer|min:1900|max:'.date("Y"),

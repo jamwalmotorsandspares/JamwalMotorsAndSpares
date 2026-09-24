@@ -12,11 +12,11 @@ class SuppliersTableSeeder extends Seeder
     public function run()
     {
         \App\Models\Supplier::create([
-            'name' => 'مورد 1',
+            'name' => 'ATUL SUPPLIER',
             'phone' => '01854689752',
         ]);
         \App\Models\Supplier::create([
-            'name' => 'مورد 2',
+            'name' => 'RAMAN SUPPLIER',
             'phone' => '01954689752',
         ]);
     }

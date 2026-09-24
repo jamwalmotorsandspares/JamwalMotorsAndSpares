@@ -18,6 +18,7 @@ class CreatePermissionAdminTable extends Migration
             $table->unsignedBigInteger('permission_id');
             $table->foreign('permission_id')->references('id')->on('permissions');
             $table->foreign('admin_id')->references('id')->on('admins');
+            $table->timestamps();
         });
     }
 

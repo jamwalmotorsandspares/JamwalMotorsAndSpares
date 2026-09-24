@@ -11,11 +11,13 @@
         "intervention/image": "^2.7",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
+        "laravel/socialite": "^5.29",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "maatwebsite/excel": "*",
         "mcamara/laravel-localization": "^1.7",
-        "mpdf/mpdf": "^8.1"
+        "mpdf/mpdf": "^8.1",
+        "razorpay/razorpay": "^2.9"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

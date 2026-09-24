@@ -27,9 +27,9 @@ class CreateUsersTable extends Migration
             $table->string('floor',50)->nullable();
             $table->string('phone',15)->nullable();
             $table->integer('payment_callback')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
-            // $table->timestamp('email_verified_at')->nullable();
-            // $table->rememberToken();
         });
     }
 

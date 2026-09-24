@@ -9,6 +9,53 @@
                         <i class="icon-frame"></i>
                     </a>
                 </li>
+                <li class="icons notification-wrapper">
+                    <a href="#" class="nav-link" data-toggle="dropdown"  id="notificationDropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="icon-bell notification-bell" ></i>
+                        <span  id="notification-count" class="badge badge-danger notification-count" > {{ auth()->user()->unreadNotifications->count() }}</span>
+                    </a>
+                    <div class="drop-down dropdown-profile animated flipInX notification-dropdown"  aria-labelledby="notificationDropdown">
+                      <h1 class="dropdown-header text-center"><strong> Notifications</strong> </h1>
+                        <div id="notification-list" class="dropdown-content-body">
+                                    @forelse(auth()->user()->notifications()->latest()->limit(5)->get() as $notification)
+                                        <a href="{{ route('dashboard.notification.read', $notification->id) }}"
+                                            class="dropdown-item notificationItem {{ is_null($notification->read_at) ? 'unread' : 'read' }}">
+                                            <div>
+                                                <strong>
+                                                    {{ $notification->data['title'] ?? 'Notification' }}
+                                                </strong>
+                                            </div>
+
+                                            <small>
+                                                {{ $notification->data['message'] ?? '' }}
+                                            </small>
+
+                                            <br>
+
+                                            <small class="text-muted">
+                                                {{ $notification->created_at->diffForHumans() }}
+                                            </small>
+                                        </a>
+
+                                        @empty
+
+                                            <div class="dropdown-item text-center">
+                                                No notifications
+                                            </div>
+
+                                        @endforelse
+
+                        </div>
+                        <div class="dropdown-divider"></div>
+                            <a href="{{ route('dashboard.notifications.index') }}"
+                            class="dropdown-item dropdown-header text-center">
+                                View All Notifications
+                            </a>
+                        <audio id="notificationSound" preload="auto">
+                                    <source src="{{ asset('sounds/notification.mp3') }}" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </li>
                 <li class="icons">
                     <a href="javascript:void(0)" class="">
                         <i class="icon-flag"></i>
@@ -55,3 +102,11 @@
         </div>
     </div>
 </div>
+@push('js')
+<script>
+// load notification after 5 Sec
+setInterval(function () {
+    loadNotifications();
+}, 5000);
+    </script>
+@endpush

@@ -20,6 +20,7 @@
         </style>
     @endif
     @stack('css')
+    
 </head>
 
 <body>
@@ -90,7 +91,7 @@
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p><a href="https://saicopy.com">Saicopy</a></p>
+                <p><a href="#">JAMWAL MOTORS AND SPARES (Only Genuine Parts Supply & Dealing.)</a></p>
             </div>
         </div>
         <!--**********************************
@@ -116,25 +117,30 @@
     <script src="{{ asset('dashboard/assets/plugins/common/common.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/custom.min.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/settings.js') }}"></script>
+    <script src="{{ asset('assets/js/notification.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/quixnav.js') }}"></script>
     <script src="{{ asset('dashboard/assets/js/styleSwitcher.js') }}"></script>
     <!-- Bootstrap notify -->
     <script src="{{ asset('dashboard/assets/plugins/bootstrap4-notify/bootstrap-notify.min.js') }}"></script>
-    @if (app()->getLocale() == 'ar')
-        <script>
-            (function($) {
-                "use strict"
-
-                new quixSettings({
-                    direction: "rtl"
-                });
-
-            })(jQuery);
-        </script>
-    @endif
     @stack('js')
     @include('dashboard.partials._errors')
     @include('dashboard.partials._session')
+@push('js')
+<script>
+    window.addEventListener('popstate', function () {
+
+    $.ajax({
+        url: "{{ route('visitor.navigation') }}",
+        type: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            url: window.location.href,
+            action: 'back_forward'
+        }
+    });
+    });
+ </script>
+@endpush
 </body>
 
 </html>

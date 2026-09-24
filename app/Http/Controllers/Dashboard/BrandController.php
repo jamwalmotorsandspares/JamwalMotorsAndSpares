@@ -27,7 +27,8 @@ class BrandController extends Controller
     {
         $this->authorize('check-permissions', 'read_brands');
         $brands = Brand::when($request->search,function ($query) use ($request){
-            return $query->where('name_en','Like','%'.$request->search.'%')->orWhere('name_ar','Like','%'.$request->search.'%');
+            return $query->where('name_en','Like','%'.$request->search.'%');
+                        //  ->orWhere('name_ar','Like','%'.$request->search.'%');
         })->latest('id')->paginate(10);
         return view('dashboard.brands.index', compact('brands'));
     }
@@ -53,7 +54,7 @@ class BrandController extends Controller
     {
         $this->authorize('check-permissions', 'create_brands');
         $request->validate([
-            'name_ar' => 'required|string|max:50|unique:brands,name_ar',
+            // 'name_ar' => 'required|string|max:50|unique:brands,name_ar',
             'name_en' => 'required|string|max:50|unique:brands,name_en',
         ]);
         Brand::create($request->all());
@@ -79,7 +80,7 @@ class BrandController extends Controller
     {
         $this->authorize('check-permissions', 'update_brands');
         $request->validate([
-            'name_ar' => 'required|max:50|unique:brands,name_ar,' . $brand->id,
+            // 'name_ar' => 'required|max:50|unique:brands,name_ar,' . $brand->id,
             'name_en' => 'required|max:50|unique:brands,name_en,' . $brand->id,
         ]);
         $brand->update($request->all());

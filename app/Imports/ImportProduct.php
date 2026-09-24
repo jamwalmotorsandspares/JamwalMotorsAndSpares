@@ -21,18 +21,19 @@ class ImportProduct implements ToModel, WithValidation,WithHeadingRow
     */
     public function model(array $row)
     {
+
         return new Product([
-            'name_ar' => $row['name_ar'],
+            // 'name_ar' => $row['name_ar'],
             'name_en' => $row['name_en'],
             'description_en' => $row['description_en'],
-            'description_ar' => $row['description_ar'],
+            // 'description_ar' => $row['description_ar'],
             'country' => $row['country'],
             'purchase_price' => $row['purchase_price'],
             'price' => $row['sale_price'],
             'stock' => $row['stock'],
-            'category_id' => Category::where('name_en','Like','%'.$row['category'].'%')->orWhere('name_ar','Like','%'.$row['category'].'%')->orWhere('id',$row['category'])->pluck('id')->first(),
-            'brand_id' => Brand::where('name_en','Like','%'.$row['brand'].'%')->orWhere('name_ar','Like','%'.$row['brand'].'%')->orWhere('id',$row['brand'])->pluck('id')->first(),
-            'car_id' => Car::where('name_en','Like','%'.$row['car'].'%')->orWhere('name_ar','Like','%'.$row['car'].'%')->orWhere('id',$row['car'])->pluck('id')->first(),
+            'category_id' => Category::where('name_en','Like','%'.$row['category'].'%')->orWhere('id',$row['category'])->pluck('id')->first(),
+            'brand_id' => Brand::where('name_en','Like','%'.$row['brand'].'%')->orWhere('id',$row['brand'])->pluck('id')->first(),
+            'car_id' => Car::where('name_en','Like','%'.$row['car'].'%')->orWhere('id',$row['car'])->pluck('id')->first(),
         ]);
         // ["name ar", "name en","purchase price","sale price","stock","country","category","brand","car","description en","description ar"]
     }
@@ -40,10 +41,10 @@ class ImportProduct implements ToModel, WithValidation,WithHeadingRow
     public function rules(): array
     {
         return [
-            'name_ar' => 'required|string|max:50',
-            'name_en' => 'required|string|max:50',
+            // 'name_ar' => 'required|string|max:50',
+            'name_en' => 'required|string|max:500',
             'description_en' => 'required|max:20000',
-            'description_ar' => 'required|max:20000',
+            // 'description_ar' => 'required|max:20000',
             'country' => 'required',
             'category' => 'required|exists:categories,name_en',
             'brand' => 'required|exists:brands,name_en',

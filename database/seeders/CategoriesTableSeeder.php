@@ -19,7 +19,7 @@ class CategoriesTableSeeder extends Seeder
         foreach ($primary_categories as $category) {
             Category::create([
                 'name_en' => $category['name_en'],
-                'name_ar' => $category['name_ar'],
+                // 'name_ar' => $category['name_ar'],
                 'category_type' => $category['category_type'],
             ]);
         }
@@ -29,7 +29,7 @@ class CategoriesTableSeeder extends Seeder
         foreach ($sub_categories as $category) {
             Category::create([
                 'name_en' => $category['name_en'],
-                'name_ar' => $category['name_ar'],
+                // 'name_ar' => $category['name_ar'],
                 'category_type' => $category['category_type'],
                 'category_id' => $category['category_id'],
             ]);
@@ -41,12 +41,12 @@ class CategoriesTableSeeder extends Seeder
             $primary_categories = [
                 [
                 'name_en' => 'Motor parts',
-                'name_ar' => 'اجزاء الموتور',
+                // 'name_ar' => 'اجزاء الموتور',
                 'category_type' => 'primary_category',
             ],
                 [
                 'name_en' => 'Luggage parts',
-                'name_ar' => 'اجزاء العفشة',
+                // 'name_ar' => 'اجزاء العفشة',
                 'category_type' => 'primary_category',
             ]
         ];
@@ -58,19 +58,19 @@ class CategoriesTableSeeder extends Seeder
             $sub_categories = [
                 [
                 'name_en' => 'Sababat',
-                'name_ar' => 'صبابات',
+                // 'name_ar' => 'صبابات',
                 'category_type' => 'sub_category',
                 'category_id' => 1,
             ],
                 [
                 'name_en' => 'Walks',
-                'name_ar' => 'سيور',
+                // 'name_ar' => 'سيور',
                 'category_type' => 'sub_category',
                 'category_id' => 1,
             ],
                 [
                 'name_en' => 'Grinding',
-                'name_ar' => 'بطاحات',
+                // 'name_ar' => 'بطاحات',
                 'category_type' => 'sub_category',
                 'category_id' => 2,
             ]

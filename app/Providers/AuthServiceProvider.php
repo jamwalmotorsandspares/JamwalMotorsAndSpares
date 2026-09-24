@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('check-permissions', function (Admin $admin,$permission) {
-            if($admin->role == 'suber_admin'){
+            if($admin->role == 'super_admin'){
                 return true;
             }else{
                 $checkAdmin = $admin->permissions->firstWhere('name',$permission);

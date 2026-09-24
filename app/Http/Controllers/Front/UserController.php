@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Services\ActivityTracker;
 
 class UserController extends Controller
 {
@@ -22,6 +23,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
+         ActivityTracker::track('USER_ORDERS');
         $orders = auth()->user()->orders()->latest()->get();
         return view('front.user.index',compact('user','orders'));
     }
@@ -29,7 +31,9 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         if($request->exists('updateProfile')){
+             ActivityTracker::track('UPDATE_PROFILE');
             if($request->exists('check_password')){
+                ActivityTracker::track('CHECK_PASSWORD');
                 $this->validatorPassword($request->all())->validate();
                 $errorPassword = $this->updatePassword($request->all());
                 if(!$errorPassword){
@@ -84,6 +88,7 @@ class UserController extends Controller
             'last_name'=> $data['last_name'],
             'phone'=> $data['phone'],
         ]);
+         ActivityTracker::track('PROFILE_UPDATED');
     }
 
     private function updateAddress(array $data)
@@ -96,6 +101,7 @@ class UserController extends Controller
             'apartment' => $data['apartment'],
             'floor' => $data['floor'],
         ]);
+        ActivityTracker::track('ADDRESS_UPDATED');
     }
     private function updatePassword(array $data)
     {
@@ -108,7 +114,7 @@ class UserController extends Controller
             }else{
                 return false;
             }
-
+    ActivityTracker::track('PASSWORD_UPDATED');
 
     }
 }

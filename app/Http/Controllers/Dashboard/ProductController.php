@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\FactoryCar;
+use App\Models\Car;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
@@ -30,7 +31,9 @@ class ProductController extends Controller
 
         $primary_categories = Category::where('category_type','primary_category')->with('subCategories')->get();
         $products = Product::with('category')->when($request->search,function ($query) use ($request){
-            return $query->where('name_en','Like','%'.$request->search.'%')->orWhere('name_ar','Like','%'.$request->search.'%')->orWhere('id','Like','%'.$request->search.'%');
+            return $query->where('name_en','Like','%'.$request->search.'%')
+            // ->orWhere('name_ar','Like','%'.$request->search.'%')
+            ->orWhere('id','Like','%'.$request->search.'%');
         })->when($request->category_id,function ($q) use ($request){
             return $q->where('category_id', $request->category_id);
         })->latest()->paginate(10);
@@ -55,9 +58,9 @@ class ProductController extends Controller
 
         $request->validate([
             'name_en' => 'required|max:50',
-            'name_ar' => 'required|max:50',
+            // 'name_ar' => 'required|max:50',
             'description_en' => 'required|max:20000',
-            'description_ar' => 'required|max:20000',
+            // 'description_ar' => 'required|max:20000',
             'country' => 'required',
             'category_id' => 'required',
             'brand_id' => 'required',
@@ -112,9 +115,9 @@ class ProductController extends Controller
 
         $request->validate([
             'name_en' => 'required|max:50',
-            'name_ar' => 'required|max:50',
+            // 'name_ar' => 'required|max:50',
             'description_en' => 'required|max:20000',
-            'description_ar' => 'required|max:20000',
+            // 'description_ar' => 'required|max:20000',
             'country' => 'required',
             'category_id' => 'required',
             'brand_id' => 'required',
@@ -183,5 +186,13 @@ class ProductController extends Controller
         $this->authorize('check-permissions', 'create_products');
 
         return Excel::download(new ExportProduct, 'products.xlsx');
+    }
+
+    public function checkStock(Product $product)
+    {
+        return response()->json([
+            'success' => true,
+            'stock'   => $product->stock,
+        ]);
     }
 }
