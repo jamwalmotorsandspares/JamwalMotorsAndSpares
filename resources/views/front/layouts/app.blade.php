@@ -10,8 +10,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @stack('meta')
-    
-    <title>{{$setting->name}}</title>
+
+    <title>{{$setting->name ?? ''}}</title>
     <!--Favicon Icon-->
     <link rel="shortcut icon" href="{{ asset('front/assets/images/favicon.png') }}" />
     <!--Google Fonts-->
