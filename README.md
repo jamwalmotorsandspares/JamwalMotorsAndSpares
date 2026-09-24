@@ -1,6 +1,6 @@
-<<<<<<< HEAD
-# El Hinnawi eCommerce System
-Welcome to El Hinnawi, your one-stop destination for all your automotive needs. Discover a comprehensive selection of high-quality auto parts and accessories, carefully curated to cater to the diverse requirements of car enthusiasts and mechanics alike.
+
+# JAMWAL MOTORS AND SPARES eCommerce System
+Welcome to JAMWAL MOTORS AND SPARES, your one-stop destination for all your automotive needs. Discover a comprehensive selection of high-quality auto parts and accessories, carefully curated to cater to the diverse requirements of car enthusiasts and mechanics alike.
 [demo](https://saico.rf.gd/)
 ## Getting started
 ### Installation
@@ -33,22 +33,3 @@ Start the local development server
 ```
 php artisan serve
 ```
-
-=======
-## Hi there 👋
-
-<!--
-**jamwalmotorsandspares/JamwalMotorsAndSpares** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
->>>>>>> 78207d53859146862d4daab5dad66321b8785639
