@@ -44,7 +44,7 @@ class SupplierController extends Controller
         if($request->exists('current_account') && $request->account_status == 1){
             $request_data['current_account'] = 0 - $request->current_account;
         }
-        // dd($request_data['current_account']);
+
         $supplier = Supplier::create($request_data);
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('dashboard.suppliers.index');

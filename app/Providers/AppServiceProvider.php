@@ -34,11 +34,12 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $setting =  \App\Models\Setting::first();
+
         $primary_categories = \App\Models\Category::where('category_type','primary_category')->with('subCategories')->get();
         View::share('primary_categories', $primary_categories);
         View::share('setting', $setting);
         } catch (\Throwable $th) {
-            
+            dd($th);
         }
 
     }

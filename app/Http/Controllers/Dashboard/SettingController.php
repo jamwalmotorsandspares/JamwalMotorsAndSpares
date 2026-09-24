@@ -14,7 +14,7 @@ class SettingController extends Controller
 
     public function index()
     {
-        $this->authorize('check-permissions', 'update_admins');
+
 
         $setting = Setting::first();
         return view('dashboard.settings.index', compact('setting'));
@@ -22,7 +22,7 @@ class SettingController extends Controller
 
     public function update(Request $request, Setting $setting)
     {
-        $this->authorize('check-permissions', 'update_admins');
+
 
         $rules= [
             'name' => 'required|max:50',

@@ -22,7 +22,6 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        // dd()
         // $product = Product::findOrFail($product->id);
 
         // if ($product->stock < $request->quantity) {

@@ -15,7 +15,7 @@ class HomeController extends Controller
     }
     public function index(){
         $categories = Category::where('category_type','sub_category')->wherehas('products')->inRandomOrder()->with('products')->limit(5)->get();
-        // dd($categories);   
+
         ActivityTracker::track(
                                         'CATEGORY_VIEW',
                                         'Customer viewed category'

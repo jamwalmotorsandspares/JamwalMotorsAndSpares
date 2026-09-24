@@ -51,10 +51,10 @@ class ClientController extends Controller
         $request_data['governorate'] =$request->state;
         unset($request_data['state']);
         $request_data['password'] = bcrypt($request->password);
-//         dd($request_data);
+
         $customer = User::create($request_data);
 
-        //admin notification
+        // admin notification
         $admins = Admin::where('role', 'super_admin')->first();
 
         // foreach ($admins as $admin) {

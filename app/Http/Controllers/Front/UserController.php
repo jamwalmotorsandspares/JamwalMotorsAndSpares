@@ -105,8 +105,8 @@ class UserController extends Controller
     }
     private function updatePassword(array $data)
     {
-        if(password_verify($data['current_password'], auth()->user()->password)){
-                dd(auth()->user()->password);
+        if(password_verify($data['current_password'],auth()->user()->password)){
+
                 auth()->user()->update( [
                     'password' => Hash::make($data['password']),
                 ]);

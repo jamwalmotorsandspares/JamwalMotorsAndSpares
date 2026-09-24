@@ -82,10 +82,7 @@ $validator->after(function ($validator) use ($request) {
 
             $quantity = (int) $item['quantity'];
             if ($quantity > $product->stock) {
-                  $validator->errors()->add(
-                "products.$productId.quantity",
-                "Only {$product->stock} units of {$product->name_en} are available."
-            );
+                  $validator->errors()->add("products.$productId.quantity","Only {$product->stock} units of {$product->name_en} are available.");
             }
         }
         });

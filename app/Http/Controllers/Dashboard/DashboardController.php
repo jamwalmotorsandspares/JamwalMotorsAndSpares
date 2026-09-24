@@ -136,7 +136,8 @@ class DashboardController extends Controller
 //     ->limit(10)
 //     ->get();
 
-    //   dd($bestSellingProduct);
+
+
         return view('dashboard.index',compact('reports','supplier_count','clients_count','products_count','topCustomersOrder','bestSellingProduct'
         ,'categories_count','orders_count','total_sales','brands_count','total_product_purchases','sales_amount_paid','sales_amount_unpaid','total_sales_current_month','today_sales'));
     }
