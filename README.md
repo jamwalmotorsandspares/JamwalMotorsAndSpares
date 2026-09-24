@@ -1,7 +1,7 @@
 
 # JAMWAL MOTORS AND SPARES eCommerce System
 Welcome to JAMWAL MOTORS AND SPARES, your one-stop destination for all your automotive needs. Discover a comprehensive selection of high-quality auto parts and accessories, carefully curated to cater to the diverse requirements of car enthusiasts and mechanics alike.
-[demo](https://saico.rf.gd/)
+[demo](https://jamwalmotorsandspares.com/)
 ## Getting started
 ### Installation
 
