@@ -159,7 +159,7 @@
                                                 {{ $message }}
                                             </div>
                                         @enderror
-                                       
+
                                         <div class="table-responsive-sm order-table">
                                             <table class="table table-hover text-center">
                                                 <thead>
@@ -205,32 +205,32 @@
                                                 </tfoot>
                                             </table>
                                         </div>
-                                    
+
                                         <div class="your-payment mt-4">
                                             <h2 class="title text-uppercase">@lang('site.payment_method')</h2>
                                             <div class="payment-method">
                                                 @csrf
                                                 <ul class="mb-20 list-unstyled">
-                                                    <li>
+                                                    {{-- <li>
                                                         <input type="radio" id="option-1" name="selector"
                                                             value="cash">
                                                         <label for="option-1" class="mx-2">@lang('site.cash_on_delivery') </label>
-                                                    </li>
+                                                    </li> --}}
                                                     <li>
                                                         <input type="radio" id="option-2" name="selector"
                                                             value="online">
                                                         <label for="option-2" class="mx-2">@lang('site.online_payment')</label>
                                                     </li>
-                                                
-                                                    
+
+
                                                 </ul>
                                                 <div class="order-button-payment mt-4 clearfix">
-                                               
+
                                                 <div class="order-button-payment mt-4 clearfix">
                                                     <button type="submit"  class="btn btn-primary btn-lg rounded-pill w-100">@lang('site.place_order')</button>
                                                 </div>
-                                               
-                                            </div>          
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

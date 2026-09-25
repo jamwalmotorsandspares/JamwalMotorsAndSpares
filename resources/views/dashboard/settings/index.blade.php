@@ -73,17 +73,62 @@
                                                 name="shipping" value="{{ $setting->shipping }}">
                                         </div>
                                     </div>
-
-
-
                                     {{-- images area --}}
                                     <div class="col-4">
                                         <label for="">@lang('site.image')</label>
                                         <input type="file" class="dropify" name="image" data-default-file="" />
                                     </div>
                                     <br>
-                                    {{-- images area.// --}}
-
+                                    {{-- social links.// --}}
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label> Facebook url</label>
+                                            <input type="text"
+                                                class="form-control @error('facebook_url') is-invalid @enderror" name="facebook_url"
+                                                value="{{ $setting->facebook_url }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label> Instagram url</label>
+                                            <input type="text"
+                                                class="form-control @error('instagram_url') is-invalid @enderror" name="instagram_url"
+                                                value="{{ $setting->instagram_url }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label> Twitter url</label>
+                                            <input type="text"
+                                                class="form-control @error('twitter_url') is-invalid @enderror" name="twitter_url"
+                                                value="{{ $setting->twitter_url }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label> Youtube url</label>
+                                            <input type="text"
+                                                class="form-control @error('youtube_url') is-invalid @enderror" name="youtube_url"
+                                                value="{{ $setting->youtube_url }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label> Linkedin url</label>
+                                            <input type="text"
+                                                class="form-control @error('linkedin_url') is-invalid @enderror" name="linkedin_url"
+                                                value="{{ $setting->linkedin_url }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label> WhatsApp url</label>
+                                            <input type="text"
+                                                class="form-control @error('whatsapp_url') is-invalid @enderror" name="whatsapp_url"
+                                                value="{{ $setting->whatsapp_url }}">
+                                        </div>
+                                    </div>
+                                    {{-- payment area.// --}}
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>payment url</label>
