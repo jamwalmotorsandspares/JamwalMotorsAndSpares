@@ -30,7 +30,7 @@
         @endguest
         <li class="social">
             <div class="list-inline m-0 social-icons">
-                <span class="list-inline-item"><a href="#;" target="_blank" title="Facebook"><i
+                {{-- <span class="list-inline-item"><a href="#;" target="_blank" title="Facebook"><i
                             class="cpb cp-facebook-f"></i></a></span>
                 <span class="list-inline-item"><a href="#;" target="_blank" title="Twitter"><i
                             class="cpb cp-twitter"></i></a></span>
@@ -41,7 +41,43 @@
                 <span class="list-inline-item"><a href="#;" target="_blank" title="Linked In"><i
                             class="cpb cp-linkedin-in"></i></a></span>
                 <span class="list-inline-item"><a href="#;" target="_blank" title="Youtube"><i
-                            class="cpb cp-youtube"></i></a></span>
+                            class="cpb cp-youtube"></i></a></span> --}}
+                 @if(!empty($setting?->facebook_url))
+                         <span class="list-inline-item"><a href="{{ $setting->facebook_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Facebook"><i class="cpb cp-facebook-f"></i></a></span>
+                        @endif
+                        @if(!empty($setting?->twitter_url))
+                            <span class="list-inline-item"><a href="{{ $setting->twitter_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="X"><i class="cpb cp-twitter"></i></a></span>
+                        @endif
+                        @if(!empty($setting?->instagram_url))
+                            <span class="list-inline-item"><a href="{{ $setting->instagram_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Instagram"><i class="cpb cp-instagram"></i></a></span>
+                        @endif
+                         @if(!empty($setting?->whatsapp_url))
+                                <span class="list-inline-item"><a href="{{ $setting->whatsapp_url }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="WhatsApp"><i class="cpb cp-whatsapp"></i></a></span>
+                        @endif
+                        @if(!empty($setting?->linkedin_url))
+                            <span class="list-inline-item"><a href="{{ $setting->linkedin_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="LinkedIn"><i class="cpb cp-linkedin-in"></i></a></span>
+                        @endif
+                        @if(!empty($setting?->youtube_url))
+                            <span class="list-inline-item"><a href="{{ $setting->youtube_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="YouTube"><i class="cpb cp-youtube"></i></a></span>
+                        @endif
             </div>
         </li>
     </ul>

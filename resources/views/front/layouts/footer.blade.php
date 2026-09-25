@@ -6,15 +6,7 @@
                     <div class="newsletter mb-3">
                         <h4 class="title">Our Newsletter</h4>
                     </div>
-                    {{-- https://www.facebook.com/profile.php?id=61590280230384 --}}
-                    {{-- https://twitter.com/login?lang=en --}}
-                     {{-- <a href="https://www.facebook.com/profile.php?id=61590280230384" target="_blank"><i class="cpb cp-facebook-f"></i></a>
-                        <a href="https://twitter.com/login?lang=en" target="_blank"><i class="cpb cp-twitter"></i></a>
-                        <a href="https://www.instagram.com/" target="_blank"><i class="cpb cp-instagram"></i></a>
-                        <a href="https://accounts.google.com/servicelogin/signinchooser?flowName=GlifWebSignIn&flowEntry=ServiceLogin" target="_blank"><i class="cpb cp-google-plus"></i></a>
-                        <a href="https://www.linkedin.com/" target="_blank"><i class="cpb cp-linkedin-in"></i></a>
-                        <a href="https://www.youtube.com/" target="_blank"><i class="cpb cp-youtube"></i></a> --}}
-                    <div class="social-col mb-3 clearfix social-links">
+                    <div class="social-col mb-3 clearfix">
                         @if(!empty($setting?->facebook_url))
                             <a href="{{ $setting->facebook_url }}"
                             target="_blank"

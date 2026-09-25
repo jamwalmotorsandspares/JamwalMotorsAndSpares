@@ -1490,21 +1490,3 @@ blockquote:before { content: "\f10d"; font-family:"capacity-bold"; font-size: 38
 #newsletter-modal .mfp-close { color:#303030; font-size:24px; opacity:1; }
 #newsletter-modal .mfp-close:before { content: "\f057"; font-family: 'capacity-bold'; font-weight: 900; }
 #newsletter-modal .newsltr-img img { height: auto; }
-
-
-
-
-.social-links {
-    display: flex;
-    gap: 12px;
-}
-
-.social-links a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    text-decoration: none;
-}

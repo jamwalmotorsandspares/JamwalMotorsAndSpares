@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 d-flex justify-content-lg-start justify-content-center">
-                <span class="phone-top d-flex align-items-center"> <a href="tel:123-456-7890"><i class="icon cps cp-phone align-middle px-1"></i> <span class="label">{{$setting->phone}}</span></a></span>
+                <span class="phone-top d-flex align-items-center"> <a href="tel:917006291696"><i class="icon cps cp-phone align-middle px-1"></i> <span class="label">{{$setting->phone}}</span></a></span>
                 <span class="language-dropdown top-dropdown d-flex align-items-center">
                     <i class="cps cp-language"></i>
                     <ul class="nav">
@@ -32,9 +32,8 @@
                     </div>
                 </div>
                 @endif
-                <ul class="list-inline m-0 social-icons social-links">
+                <ul class="list-inline m-0 social-icons ">
                  @if(!empty($setting?->facebook_url))
-                    {{-- //https://www.facebook.com/profile.php?id=61590280230384 --}}
                     <li class="list-inline-item"><a href="{{ $setting->facebook_url }}" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook"><i class="cpb cp-facebook-f"></i></a></li>
                 @endif
                 @if(!empty($setting?->twitter_url))
