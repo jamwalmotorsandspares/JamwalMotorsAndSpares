@@ -61,20 +61,43 @@
                 <div class="col-4 col-sm-3 col-md-4 col-lg-4 col-xl-4 d-flex justify-content-end align-items-center">
                     <!--Search-->
                     <div class="serach-site px-3 d-flex d-lg-none">
-                        <a href="javascript:void(0)" class="btn btn-secondary btn-lg rounded-circle search-icon"><i
+                        <a href="javascript:void(0)" class="mobileSearch btn btn-secondary btn-lg rounded-circle search-icon"><i
                                 class="cps cp-search align-middle"></i></a>
                     </div>
+                    <!-- Mobile Search -->
+{{-- <div class="mobile-search-bar d-lg-none">
+    <div class="container">
+        <form action="{{route('products.index')}}" method="GET" class="mobile-search-form">
+            <div class="mobile-search-box">
+                <input
+                    type="text"
+                    name="search"
+                    value=""
+                    placeholder="Search products..."
+                    autocomplete="off"
+                    aria-label="Search products"
+                >
+
+                <button type="submit" aria-label="Search" class="action search">
+                    <i class="icon cps cp-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div> --}}
+<!-- End Mobile Search -->
+<!-- Start Desktop Search -->
                     <div class="search-open d-none d-lg-flex">
                         <form action="{{route('products.index')}}" method="get">
                             <div class="input-box d-flex">
-                                <input type="text" name="search" value="" placeholder="{{__('site.search')}}..."
+                                <input type="text" name="search" value="" placeholder="Search products..."
                                     class="input-text">
                                 <button type="submit" title="Search" class="action search"><i
                                         class="icon cps cp-search"></i></button>
                             </div>
                         </form>
                     </div>
-                    <!--End Search-->
+                    <!--End Desktop Search-->
                     <!--Cart Icons-->
                     <a href="{{ route('carts.index') }}"
                         class="btn btn-secondary btn-lg rounded-circle cart-icon"><i class="cp cp-shopping-cart"></i>

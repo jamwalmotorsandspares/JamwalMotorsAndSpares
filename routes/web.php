@@ -43,3 +43,8 @@ Route::post('/payment/razorpay/create-order','RazorpayController@createOrder')->
 Route::post('/payment/razorpay/verify','RazorpayController@verify')->name('razorpay.verify');
 
 Route::post('/payment/razorpay/webhook','RazorpayController@webhook')->name('razorpay.webhook');
+
+
+
+
+

@@ -160,6 +160,20 @@
 setInterval(function () {
     loadNotifications();
 }, 5000);
+
+
+
+$('#mobileSearch').on('submit', function (e) {
+    e.preventDefault();
+
+    let search = $('#mobileSearchInput').val().trim();
+
+    if (search !== '') {
+        window.location.href =
+            "{{ route('products.index') }}?search=" +
+            encodeURIComponent(search);
+    }
+});
     </script>
 @endpush
 </body>
