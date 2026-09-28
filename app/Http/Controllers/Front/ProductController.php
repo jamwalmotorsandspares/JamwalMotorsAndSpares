@@ -13,7 +13,8 @@ use App\Services\ActivityTracker;
 
 class ProductController extends Controller
 {
-
+// UPDATE products SET car_id = 626 WHERE name_en LIKE '%SWIFT DZIRE%' AND car_id != 668;
+// UPDATE products SET car_id = 626 WHERE name_en LIKE '%SWIFT DZIRE%'
     public function index(Request $request)
     {
         $brands = Brand::all();
@@ -38,7 +39,7 @@ class ProductController extends Controller
         })->latest()->paginate(12);
 
         ActivityTracker::track('PRODUCT_LIST');
-        
+
         return view('front.products.index', compact('products','brands','factoryCars','countries'));
     }
 
