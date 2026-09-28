@@ -2,13 +2,20 @@
     <div class="container-fluid">
         <div class="row align-items-center">
             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-4 d-flex justify-content-lg-start justify-content-center">
-                <span class="phone-top d-flex align-items-center"> <a href="tel:917006291696"><i class="icon cps cp-phone align-middle px-1"></i> <span class="label">{{$setting->phone}}</span></a></span>
+                <span class="phone-top d-flex align-items-center"> <a href="tel:+917006291696"><i class="icon cps cp-phone align-middle px-1"></i> <span class="label"><strong>Call Us</strong></span></a></span>
+                <span class="language-dropdown top-dropdown d-flex align-items-center">
+                    <i class="cps cp-envelope"></i>
+                    <ul class="nav">
+                        <li class="nav-item"><a class="nav-link" rel="alternate"
+                            href="mailto:jamwalmotorsandspares@gmail.com"><strong>E-MAIL</strong></a></li>
+                    </ul>
+                </span>
                 <span class="language-dropdown top-dropdown d-flex align-items-center">
                     <i class="cps cp-language"></i>
                     <ul class="nav">
                         @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                         <li class="nav-item"><a class="nav-link {{$localeCode == app()->getLocale() ? 'active' : ''}}" rel="alternate" hreflang="{{ $localeCode }}"
-                            href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">{{ $properties['native'] }}</a></li>
+                            href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"><strong>{{ $properties['native'] }}</strong></a></li>
                         @endforeach
                     </ul>
                 </span>

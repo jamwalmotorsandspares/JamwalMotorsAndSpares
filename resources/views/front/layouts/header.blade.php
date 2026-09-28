@@ -110,14 +110,14 @@
         <div id="search-popup" class="search-drawer">
             <div class="container">
                 <span class="closeSearch cps cp-times"></span>
-                <form class="form minisearch" id="header-search" action="#" method="get">
+                <form class="form minisearch" id="header-search" action="{{route('products.index')}}" method="get">
                     <label class="label"><span>@lang('site.search')</span></label>
                     <div class="control">
                         <div class="searchField">
                             <div class="input-box">
-                                <button type="submit" title="Search" class="action search" disabled=""><i
+                                <button type="submit" title="Search" class="action search"><i
                                         class="icon cps cp-search"></i></button>
-                                <input type="text" name="q" value="" placeholder="Search by keyword or #"
+                                <input type="search" name="search" value="" placeholder="Search by keyword or #"
                                     class="input-text">
                             </div>
                         </div>
