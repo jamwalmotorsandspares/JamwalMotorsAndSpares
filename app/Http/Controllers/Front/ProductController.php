@@ -16,6 +16,7 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
+
         $brands = Brand::all();
         $factoryCars = FactoryCar::all();
         $countries = Product::select('country')->groupBy('country')->pluck('country');
@@ -39,7 +40,7 @@ class ProductController extends Controller
 
         ActivityTracker::track('PRODUCT_LIST');
 
-        return view('front.products.index', compact('products','brands','factoryCars','countries'));
+         return view('front.products.index', compact('products','brands','factoryCars','countries'));
     }
 
     public function show(Product $product)

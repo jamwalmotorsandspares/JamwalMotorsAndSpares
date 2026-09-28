@@ -64,7 +64,9 @@
                             <!--Product Grid-->
                             <div class="products-grid">
                                 <div class="row">
+
                                     @foreach ($products as $product)
+
                                         <div class="col-6 col-sm-6 col-md-4 col-lg-3">
                                             <!--Product Item-->
                                             <div class="item">
@@ -99,16 +101,20 @@
                                                 </div>
                                                 <!--End Product Image-->
                                                 <!--Product Detail-->
+                                                {{-- {{print_r($product)}} --}}
+                                                {{-- {{dd($product->car ===1)}} --}}
+                                                @if($product->car !="")
                                                 <div class="product-details d-flex">
                                                     <div class="product-details-in">
                                                         <div class="h3"><a
-                                                                href="{{ route('products.show', $product->id) }}">{{ $product->name .' - '.$product->car->name.' ('.$product->car->start_year.'-'.$product->car->end_year.')' }}</a>
+                                                                href="{{ route('products.show', $product->id) }}">{{ $product->name.' - '.$product->car->name.' ('.$product->car->start_year.'-'.$product->car->end_year.')' }}</a>
                                                         </div>
                                                         <div class="price-box"><span
                                                                 class="price">₹{{ number_format($product->price, 2) }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endif
                                                 <!--End Product Detail-->
                                             </div>
                                             <!--End Product Item-->
