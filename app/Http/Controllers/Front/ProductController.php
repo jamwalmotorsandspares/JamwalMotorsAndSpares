@@ -13,8 +13,7 @@ use App\Services\ActivityTracker;
 
 class ProductController extends Controller
 {
-// UPDATE products SET car_id = 626 WHERE name_en LIKE '%SWIFT DZIRE%' AND car_id != 668;
-// UPDATE products SET car_id = 626 WHERE name_en LIKE '%SWIFT DZIRE%'
+
     public function index(Request $request)
     {
         $brands = Brand::all();
