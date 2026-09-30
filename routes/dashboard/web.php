@@ -20,7 +20,7 @@ function(){
 
     Route::group(['namespace' => 'Auth'], function () {
         // Authentication Routes...
-        Route::get('login', 'LoginController@showLoginForm')->name('login');
+        Route::get('login', 'LoginController@showLoginForm');
         Route::get('register', 'RegisterController@showRegistrationForm');
         Route::post('register', 'RegisterController@register')->name('register');
         Route::post('login', 'LoginController@login')->name('login');
