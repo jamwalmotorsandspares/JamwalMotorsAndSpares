@@ -13,8 +13,7 @@ use App\Services\ActivityTracker;
 
 class ProductController extends Controller
 {
-// UPDATE products SET car_id = 604 WHERE name_en LIKE '%ALTO%' AND (car_id != 630 AND car_id != 643);
-// UPDATE products SET car_id = 683 WHERE car_id = 695
+
     public function index(Request $request)
     {
 
@@ -51,11 +50,13 @@ class ProductController extends Controller
 
         return view('front.products.show', compact('product','products_silder'));
     }
+
     public function getCarYearsAjax(Request $request)
     {
         $data['years'] = Car::where('factory_car_id',$request->factoryCarId)->get();
         ActivityTracker::track('SEARCH_BY_CAR_YEARS');
-    return json_encode($data);
+
+        return json_encode($data);
     }
 
 
