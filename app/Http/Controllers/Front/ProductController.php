@@ -13,7 +13,8 @@ use App\Services\ActivityTracker;
 
 class ProductController extends Controller
 {
-
+// UPDATE products SET car_id = 604 WHERE name_en LIKE '%ALTO%' AND (car_id != 630 AND car_id != 643);
+// UPDATE products SET car_id = 683 WHERE car_id = 695
     public function index(Request $request)
     {
 

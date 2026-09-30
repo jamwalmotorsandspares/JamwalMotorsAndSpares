@@ -71,8 +71,7 @@ function(){
         Route::get('/export-brands','BrandController@exportBrands')->name('export-brands');
         // products routes
         Route::resource('products', 'ProductController');
-        Route::get('/product/{product}/stock', [ProductController::class, 'checkStock'])
-        ->name('product.stock');
+        Route::get('/product/{product}/stock','ProductController@checkStock')->name('product.stock');
         Route::post('/import-products','ProductController@import')->name('import-products');
         Route::get('/export-products','ProductController@exportProducts')->name('export-products');
 
