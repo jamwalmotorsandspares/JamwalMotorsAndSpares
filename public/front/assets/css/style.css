@@ -1542,4 +1542,124 @@ blockquote:before { content: "\f10d"; font-family:"capacity-bold"; font-size: 38
         font-size: 12px;
     }
 }
-```
+
+
+```css
+/* =====================================
+   UNIFORM PRODUCT GRID
+   Applies to uploaded and default images
+===================================== */
+
+.products-grid .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.products-grid .row > [class*="col-"] {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.products-grid .item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* Fixed, responsive square image area */
+.products-grid .product-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #fff;
+}
+
+/* Image link fills the image area */
+.products-grid .product-image > a.product-thumb {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Uploaded image and default.png */
+.products-grid .product-image img.primary,
+.products-grid .product-image img.hover {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    background: #fff;
+}
+
+/* Product details align consistently */
+.products-grid .product-details {
+    display: flex;
+    flex: 1 1 auto;
+    padding: 12px;
+    min-width: 0;
+}
+
+.products-grid .product-details-in {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Reserve consistent title space */
+.products-grid .product-details .h3 {
+    font-size: 14px;
+    line-height: 1.5;
+    height: 42px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.products-grid .product-details .h3 a {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+}
+
+/* Price stays aligned */
+.products-grid .price-box {
+    margin-top: auto;
+}
+
+/* Tablet */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .products-grid .product-image {
+        aspect-ratio: 1 / 1;
+    }
+}
+
+/* Mobile */
+@media (max-width: 575.98px) {
+    .products-grid .row > [class*="col-"] {
+        margin-bottom: 12px;
+    }
+
+    .products-grid .product-details {
+        padding: 8px;
+    }
+
+    .products-grid .product-details .h3 {
+        font-size: 12px;
+        line-height: 1.4;
+        height: 34px;
+    }
+}
