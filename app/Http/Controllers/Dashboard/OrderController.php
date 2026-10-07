@@ -18,6 +18,9 @@ use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Validator;
 
+use App\Mail\OrderCreatedMail;
+use Illuminate\Support\Facades\Mail;
+
 class OrderController extends Controller
 {
     use InvoiceTrait,ReportTrait;
@@ -108,9 +111,12 @@ $validator->after(function ($validator) use ($request) {
         //admin notification
         $admins = Admin::where('role', 'super_admin')->first();
 
+
         // foreach ($admins as $admin) {
             $admins->notify(new NewOrderNotification($order));
         // }
+
+      Mail::to(\Auth::user()->email)->send(new OrderCreatedMail($order));
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('dashboard.orders.show',$order->id);
     }
@@ -229,6 +235,9 @@ $validator->after(function ($validator) use ($request) {
                 'floor'=> $order->user->floor,
                 'user_id'=>$order->user_id,
             ]);
+
+            Mail::to(\Auth::user()->email)->send(new OrderDeliveredMail($order));
+
             // end order area
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('dashboard.orders.show',$order->id);

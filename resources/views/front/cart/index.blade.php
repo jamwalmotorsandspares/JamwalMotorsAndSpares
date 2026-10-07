@@ -66,7 +66,7 @@
                                                             alt="product" title="product"></a></td>
                                                 <td class="product-name">
                                                     <a
-                                                        href="{{ route('products.show', $product->id) }}">{{$product->name.' '.$product->car->name.' ('.$product->car->start_year.'-'.$product->car->end_year.') '.$product->country }}</a>
+                                                        href="{{ route('products.show', $product->id) }}">{{$product->name_en.' '.$product->car->name_en.' ('.$product->car->start_year.'-'.$product->car->end_year.') '.$product->country }}</a>
                                                 </td>
                                                 <td class="product-price" data-title="Price">
                                                     ₹{{ number_format($product->price, 2) }}</td>
@@ -183,15 +183,18 @@
                                 </div>
                                 <!--End Product Image-->
                                 <!--Product Detail-->
+                                {{-- {{dd($product_silder)}} --}}
+                                @if($product->car !="")
                                 <div class="product-details d-flex">
                                     <div class="product-details-in">
                                         <div class="h3"><a
-                                                href="{{ route('products.show', $product_silder->id) }}">{{ $product_silder->name }} {{ $product_silder->car->name.' ('.$product_silder->car->start_year.'-'.$product_silder->car->end_year.')' }}</a>
+                                                href="{{ route('products.show', $product_silder->id) }}">{{ $product_silder->name_en }} {{ $product_silder->car->name_en.' ('.$product_silder->car->start_year.'-'.$product_silder->car->end_year.')' }}</a>
                                         </div>
                                         <div class="price-box"><span
                                                 class="price">₹{{ number_format($product_silder->price, 2) }}</span></div>
                                     </div>
                                 </div>
+                                @endif
                                 <!--End Product Detail-->
                             </div>
                             <!--End Product Item-->

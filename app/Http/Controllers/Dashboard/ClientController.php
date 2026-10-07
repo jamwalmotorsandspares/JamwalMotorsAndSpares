@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Notifications\NewCustomerNotification;
+use App\Mail\CustomerCreatedMail;
+use Illuminate\Support\Facades\Mail;
 
 
 
@@ -60,6 +62,9 @@ class ClientController extends Controller
         // foreach ($admins as $admin) {
             $admins->notify(new NewCustomerNotification($customer));
         // }
+
+        Mail::to($customer->email)->send(new CustomerCreatedMail($customer));
+
         session()->flash('success', __('site.added_successfully'));
         return redirect()->route('dashboard.clients.index');
     }

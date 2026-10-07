@@ -102,12 +102,12 @@
                                                 <!--End Product Image-->
                                                 <!--Product Detail-->
                                                 {{-- {{print_r($product)}} --}}
-                                                {{-- {{dd($product->car ===1)}} --}}
+                                                {{-- {{dd($product)}} --}}
                                                 @if($product->car !="")
                                                 <div class="product-details d-flex">
                                                     <div class="product-details-in">
                                                         <div class="h3"><a
-                                                                href="{{ route('products.show', $product->id) }}">{{ $product->name.' - '.$product->car->name.' ('.$product->car->start_year.'-'.$product->car->end_year.')' }}</a>
+                                                                href="{{ route('products.show', $product->id) }}">{{ $product->name_en.' - '.$product->car->name_en.' ('.$product->car->start_year.'-'.$product->car->end_year.')' }}</a>
                                                         </div>
                                                         <div class="price-box"><span
                                                                 class="price">₹{{ number_format($product->price, 2) }}</span>

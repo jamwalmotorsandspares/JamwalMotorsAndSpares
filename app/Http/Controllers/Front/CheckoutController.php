@@ -70,7 +70,7 @@ class CheckoutController extends Controller
         if($checkStock){
             return redirect()->back()->withErrors(["missing_data" => __('site.missing_data')])->withInput();
         }
-        
+
         $order=$this->createOrder($user,$request->selector,true);
 
         if($request->selector == "online" ){
@@ -79,7 +79,7 @@ class CheckoutController extends Controller
                     'PAYMENT STARTED',
                     $order
                 );
-    
+
             $setting = Setting::first();
             $products = $user->products;
             $sub_total = $user->products()->sum(\DB::raw('products.price * product_user.quantity'));

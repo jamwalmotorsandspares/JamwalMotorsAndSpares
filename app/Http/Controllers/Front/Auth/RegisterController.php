@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Services\ActivityTracker;
+use App\Mail\CustomerCreatedMail;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -77,6 +79,7 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
+     Mail::to($user->email)->send(new CustomerCreatedMail($user));
         ActivityTracker::track('REGISTERED');
         if (session()->has('guest_cart')) {
 

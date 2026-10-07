@@ -14,6 +14,7 @@ class HomeController extends Controller
         // $this->middleware('auth');
     }
     public function index(){
+
         $categories = Category::where('category_type','sub_category')->wherehas('products')->inRandomOrder()->with('products')->limit(5)->get();
 
         ActivityTracker::track(

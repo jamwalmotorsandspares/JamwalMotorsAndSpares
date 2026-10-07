@@ -260,16 +260,19 @@
                                 </div>
                                 <!--End Product Image-->
                                 <!--Product Detail-->
+                               {{-- {{ print_r($product);}} --}}
+                                 @if($product->car !="")
                                 <div class="product-details d-flex">
                                     <div class="product-details-in">
                                         <div class="h3"><a
-                                                href="{{ route('products.show', $product_silder->id) }}">{{ $product_silder->name }} {{ $product_silder->car->name.' ('.$product_silder->car->start_year.'-'.$product_silder->car->end_year.')' }}</a>
+                                                href="{{ route('products.show', $product_silder->id) }}">{{ $product_silder->name }} {{ $product_silder->car->name_en.' ('.$product_silder->car->start_year.'-'.$product_silder->car->end_year.')' }}</a>
                                         </div>
                                         <div class="price-box"><span
                                                 class="price">₹{{ number_format($product_silder->price, 2) }}</span>
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                                 <!--End Product Detail-->
                             </div>
                             <!--End Product Item-->

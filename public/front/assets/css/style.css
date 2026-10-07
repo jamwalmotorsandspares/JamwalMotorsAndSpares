@@ -919,7 +919,7 @@ blockquote:before { content: "\f10d"; font-family:"capacity-bold"; font-size: 38
 ========================================================================*/
 .products-grid .item { margin-bottom: 30px; }
 .products-grid .product-details .h3, .products-list .product-details .h3 { margin: 0; line-height: 22px; }
-.products-grid .product-details .h3 a, .products-list .product-details .h3 a { color: #303030; font-size: 18px; font-weight: 600; line-height: 22px; }
+.products-grid .product-details .h3 a, .products-list .product-details .h3 a { color: #303030; font-size: 15px; font-weight: 600; line-height: 15px; }
 .products-grid .product-details .h3 a:hover, .products-list .product-details .h3 a:hover { color: #d30a0c; }
 .products-grid .price-box, .products-list .price-box { margin: 5px 0; }
 .products-grid .price-box .price, .products-list .price-box .price { color: #d30a0c; font-size: 24px; font-weight: 700; }
@@ -1490,7 +1490,7 @@ blockquote:before { content: "\f10d"; font-family:"capacity-bold"; font-size: 38
 #newsletter-modal .mfp-close { color:#303030; font-size:24px; opacity:1; }
 #newsletter-modal .mfp-close:before { content: "\f057"; font-family: 'capacity-bold'; font-weight: 900; }
 #newsletter-modal .newsltr-img img { height: auto; }
-```css
+
 /* Consistent product image area */
 .products-grid .product-image {
     position: relative;
@@ -1544,7 +1544,6 @@ blockquote:before { content: "\f10d"; font-family:"capacity-bold"; font-size: 38
 }
 
 
-```css
 /* =====================================
    UNIFORM PRODUCT GRID
    Applies to uploaded and default images

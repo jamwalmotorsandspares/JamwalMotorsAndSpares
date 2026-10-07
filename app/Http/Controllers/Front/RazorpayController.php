@@ -7,6 +7,8 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Razorpay\Api\Api;
 use Exception;
+use App\Mail\OrderCreatedMail;
+use Illuminate\Support\Facades\Mail;
 
 class RazorpayController extends Controller
 {
@@ -83,6 +85,13 @@ class RazorpayController extends Controller
                 'payment_status' => 1,
                 'payment_method' => 'razorpay',
             ]);
+
+
+        //user
+        Mail::to(\Auth::user()->email)->send(new OrderCreatedMail($order));
+        //admin
+        Mail::to('jamwalmotorsandspares@gmail.com')->send(new OrderCreatedMail($order));
+
             session()->flash('order_success', __('site.order_successfully'));
             return response()->json([
                 'success' => true,
